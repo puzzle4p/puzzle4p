@@ -1,0 +1,37 @@
+Nazwy po angielsku, 
+Klasy z duzej litery, 
+funkcje z malej litery w klasach 
+zmienne z podkresleniem na poczatku w klasach
+globalne (jak ten enum) zrobić na zasadzie global_nazwaZmiennej
+Nie uzywamy pokreslen w zmiennych (wyjatek global)
+
+class Foo {
+	bar();
+	int _zmiennaJakas;
+};
+
+brackety piszemy w sposób taki. Jeżeli to klasa czy funkcja otwierający jest w ten samej lini inaczej dajemy nowa linię
+
+class Foo {
+	bar() {
+  		for (int i = 0 ; i < 10 ; i++)
+  		{
+  			if(i == 5) 
+   			{
+    			cout << "yey";
+   			}
+  		}
+ 	}
+ 	int _zmienna;
+};
+
+brackety piszemy ZAWSZE, bez wyjątków
+
+
+obecne taski (jak projekt sie rozszerzy przejdziemy na do.com czy inna podobna strone)
+
+Gancus -> Board  			
+Dregorio -> GUI  			
+se7ven -> Menu   			
+ZU0 -> Game      			
+Programmer98 -> Loader  	

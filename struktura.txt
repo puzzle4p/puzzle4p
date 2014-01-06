@@ -1,0 +1,75 @@
+enum global_States = {menu, game}
+
+Loader
+  -main() // tutaj wielka petla i robimy stateManager:update()
+  .stateManager
+
+ StateManager
+  -update()
+  -changeState() //statyczna
+  -onMouseDown()
+  .currentState
+
+Game // game jest jako takim state'm więc gdy w stateManagerze currentState bedzie game to wtedy update wykona się tylko z tej klasy a nie z innych
+  .playerOne, playerTwo
+  .board
+  .states = {playing, pause, ready, finish, score, loading}
+  .background
+  -dealDamage(who)
+  -changeLevel()
+  -startGame()
+  -update()
+  -onMouseDown()
+
+Board
+  .tiles
+  .damageDiamonds
+  -fillBoard()
+  -addTile()
+  -onMouseDown()
+  -update()
+  -checkIfMatch()
+  -changePlacesOfTiles()
+  -refillWithNewTiles()
+
+Player
+  .hp
+
+Tile // http://pl.wikipedia.org/wiki/Fabryka_abstrakcyjna_(wzorzec_projektowy)
+
+Menu
+  .background
+  -onMouseClick
+
+Background
+  .image
+  .GUI
+  -setVisibleElement()
+
+GUI //absracyjna klasa, zapewne jeszcze jakis atrybut z SDLa tutaj bedzie, 
+  .x,y,width,height
+
+Button:GUI
+  .text
+
+InputBox:GUI
+  -onMouseDown() // tak wiem ze onkeyboardDown, ale wytlumacze pozniej
+  -getValue()
+
+
+// tutaj klasy ktore fajnie by bylo miec, ale nie jest na tak szybko potrzebne.
+
+Text 
+
+Timer
+
+LayerManager
+
+RenderManager
+
+ResourceManager
+
+LoadingState
+
+PauseState
+

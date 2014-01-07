@@ -19,14 +19,20 @@ Menu::~Menu()
     backgroundSurface = NULL;
 }
 
-bool Menu::onMouseClick(SDL_Event event)
+void Menu::onMouseClick(SDL_Event event)
 {
-    if(event.type == SDL_MOUSEBUTTONDOWN)
+    int x = 0,y = 0;
+    if(event.type == SDL_MOUSEBUTTONUP)
     {
         if(event.button.button == SDL_BUTTON_LEFT)
         {
-            return true;
+            x = event.button.x;
+            y = event.button.y;
+
+            if(x > 0 && x < 640 && y > 0 && y < 480)
+            {
+                std::cout << "x:" << x << " | y:" << y << std::endl;
+            }
         }
     }
-    return false;
 }

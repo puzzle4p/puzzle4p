@@ -94,6 +94,8 @@ void Board::onMouseDown(SDL_Event event)
 {
 	if(event.type == SDL_MOUSEBUTTONDOWN)
 	{
+		int x = event.button.x;
+		int y = event.button.y;
 		Tile* clickedTile = NULL;
 		int previouslyClickedTileX;
 		int previouslyClickedTileY;

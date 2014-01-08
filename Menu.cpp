@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include "Menu.h"
 #include "Background.h"
+#include "Util.h"
 #include <string>
 #include <iostream>
 
@@ -19,20 +20,14 @@ Menu::~Menu()
     backgroundSurface = NULL;
 }
 
-void Menu::onMouseClick(SDL_Event event)
+void Menu::onMouseDown(SDL_Event event, int pointerX, int pointerY)
 {
-    int x = 0,y = 0;
-    if(event.type == SDL_MOUSEBUTTONUP)
+    Util util;
+    if(event.button.button == SDL_BUTTON_LEFT)
     {
-        if(event.button.button == SDL_BUTTON_LEFT)
+        if(util.isPointInsideRect(pointerX, pointerY, 50, 50, 100, 100))
         {
-            x = event.button.x;
-            y = event.button.y;
-
-            if(x > 0 && x < 640 && y > 0 && y < 480)
-            {
-                std::cout << "x:" << x << " | y:" << y << std::endl;
-            }
+            std::cout << pointerX << " | " << pointerY << " -- in\n";
         }
     }
 }

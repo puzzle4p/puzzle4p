@@ -4,6 +4,7 @@
 class Background
 {
 public:
-    Background(std::string where);
+    Background(std::string destinationOfImage);
+private:
     SDL_Surface *backgroundImage;
 };

@@ -12,9 +12,12 @@ Menu menu(gWindow, "hello.bmp");
 
 while(true)
 {
-    if(SDL_PollEvent(&event))
+    if(SDL_PollEvent(&event) && SDL_MOUSEBUTTONDOWN)
     {
-        menu.onMouseClick(event);
+        int x = event.button.x;
+        int y = event.button.y;
+
+        menu.onMouseDown(event, x, y);
     }
 }
 

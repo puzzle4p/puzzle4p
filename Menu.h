@@ -1,7 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include <string>
 #include "SDL.h"
 #include "menu.h"
 #include "background.h"

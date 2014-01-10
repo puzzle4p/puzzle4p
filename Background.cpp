@@ -1,5 +1,4 @@
-#include "Background.h"
-#include <string>
+#include "background.h"
 
 Background::Background(std::string destinationOfImage)
 {

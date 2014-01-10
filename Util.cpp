@@ -1,6 +1,6 @@
 #include "Util.h"
 
-bool Util::isPointInsideRect(int pointX, int pointY, int rectX, int rectY, int rectWidth, int rectHeight)
+bool isPointInsideRect(int pointX, int pointY, int rectX, int rectY, int rectWidth, int rectHeight)
 {
     int minX = rectX - rectWidth / 2;
     int minY = rectY - rectHeight / 2;

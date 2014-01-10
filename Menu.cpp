@@ -1,9 +1,4 @@
-#include "SDL.h"
-#include "Menu.h"
-#include "Background.h"
-#include "Util.h"
-#include <string>
-#include <iostream>
+#include "menu.h"
 
 Menu::Menu(SDL_Window *mainWindow, std::string destinationOfImage)
 {
@@ -22,10 +17,9 @@ Menu::~Menu()
 
 void Menu::onMouseDown(SDL_Event event, int pointerX, int pointerY)
 {
-    Util util;
     if(event.button.button == SDL_BUTTON_LEFT)
     {
-        if(util.isPointInsideRect(pointerX, pointerY, 50, 50, 100, 100))
+        if(isPointInsideRect(pointerX, pointerY, 50, 50, 100, 100))
         {
             std::cout << pointerX << " | " << pointerY << " -- in\n";
         }

@@ -1,4 +1,13 @@
+#ifndef MENU_H
+#define MENU_H
+
 #include <string>
+#include "SDL.h"
+#include "menu.h"
+#include "background.h"
+#include "util.h"
+#include <string>
+#include <iostream>
 
 class Menu
 {
@@ -10,3 +19,5 @@ private:
     SDL_Surface *windowSurface;
     SDL_Surface *backgroundSurface;
 };
+
+#endif // MENU_H

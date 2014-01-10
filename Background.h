@@ -1,3 +1,5 @@
+#ifndef BACKGROUND_H
+#define BACKGROUND_H
 #include "SDL.h"
 #include <string>
 
@@ -8,3 +10,5 @@ public:
 private:
     SDL_Surface *backgroundImage;
 };
+
+#endif //BACKGROUND_H

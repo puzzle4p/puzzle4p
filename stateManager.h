@@ -7,12 +7,12 @@
 class stateManager
 {
 public:
-    void update();
-    void changeState(global_States state);
-    void onMouseDown(int pointerX, int pointerY);
-    std::map<global_States, State*> enumMapToStates;
-    void addToMap(global_States globalState, State* stateObject);
+    static void update();
+    static void changeState(global_States state);
+    static void onMouseDown(int pointerX, int pointerY);
+    static std::map<global_States, State*> enumMapToStates;
+    static void addToMap(global_States globalState, State* stateObject);
 private:
-    global_States current_state;
+    static global_States current_state;
 
 };

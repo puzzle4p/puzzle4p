@@ -1,5 +1,8 @@
 #include "stateManager.h"
 
+global_States stateManager::current_state;
+std::map<global_States, State*> stateManager::enumMapToStates;
+
 void stateManager::update()
 {
 

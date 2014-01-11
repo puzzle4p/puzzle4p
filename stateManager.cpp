@@ -5,9 +5,9 @@ void stateManager::update()
 
 }
 
-void stateManager::onMouseDown(SDL_Event event, int pointerX, int pointerY)
+void stateManager::onMouseDown(int pointerX, int pointerY)
 {
-    enumMapToStates[current_state]->onMouseDown(event, pointerX, pointerY);
+    enumMapToStates[current_state]->onMouseDown(pointerX, pointerY);
 }
 
 void stateManager::changeState(global_States state)
@@ -20,11 +20,11 @@ void stateManager::changeState(global_States state)
 
     if(current_state == STATE_GAME)
     {
-        std::cout << "game";
+        std::cout << "CHANGE STATE TO GAME" << std::endl;
     }
     else
     {
-        std::cout << "menu";
+        std::cout << "CHANGE STATE TO MENU" << std::endl;
     }
 }
 

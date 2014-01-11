@@ -6,5 +6,5 @@
 class Game : public State
 {
 public:
-    void onMouseDown(SDL_Event event, int pointerX, int pointerY);
+    void onMouseDown(int pointerX, int pointerY);
 };

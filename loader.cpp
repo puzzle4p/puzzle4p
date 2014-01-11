@@ -35,7 +35,7 @@ int main(int argc, char* args[])
                 int x = event.button.x;
                 int y = event.button.y;
 
-                state.onMouseDown(event, x, y);
+                state.onMouseDown(x, y);
             }
             if(event.type == SDL_TEXTINPUT)
             {

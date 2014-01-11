@@ -17,8 +17,8 @@ public:
     ~Menu();
     void onMouseDown(int pointerX, int pointerY);
 private:
+    Background *backgroundSurface;
     SDL_Surface *windowSurface;
-    SDL_Surface *backgroundSurface;
 };
 
 #endif // MENU_H

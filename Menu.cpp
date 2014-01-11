@@ -3,16 +3,8 @@
 Menu::Menu(SDL_Window *mainWindow, std::string destinationOfImage)
 {
     windowSurface = SDL_GetWindowSurface(mainWindow);
-    backgroundSurface = SDL_LoadBMP(destinationOfImage.c_str());
-
-    SDL_BlitSurface(backgroundSurface, NULL, windowSurface, NULL );
+    backgroundSurface = new Background(windowSurface, destinationOfImage);
     SDL_UpdateWindowSurface(mainWindow);
-}
-
-Menu::~Menu()
-{
-    SDL_FreeSurface(backgroundSurface);
-    backgroundSurface = NULL;
 }
 
 void Menu::onMouseDown(int pointerX, int pointerY)

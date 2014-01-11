@@ -6,7 +6,8 @@
 class Background
 {
 public:
-    Background(std::string destinationOfImage);
+    Background(SDL_Surface *windowSurface, std::string destinationOfImage);
+    ~Background();
 private:
     SDL_Surface *backgroundImage;
 };

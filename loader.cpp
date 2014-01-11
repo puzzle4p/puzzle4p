@@ -14,10 +14,11 @@ int main(int argc, char* args[])
     int windowWidth = 640;
     int windowHeight = 480;
     std::string windowTitle = "puzzle4p";
+    std::string destinationOfImage = "hello.bmp";
 
     SDL_Window* mainWindow = SDL_CreateWindow(windowTitle.c_str(), 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 
-    stateManager::addToMap(STATE_MENU, new Menu(mainWindow, "hello.bmp"));
+    stateManager::addToMap(STATE_MENU, new Menu(mainWindow, destinationOfImage));
     stateManager::addToMap(STATE_GAME, new Game());
 
     stateManager::changeState(STATE_MENU);

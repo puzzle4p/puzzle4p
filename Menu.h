@@ -1,14 +1,16 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include <string>
 #include "SDL.h"
-#include "menu.h"
-#include "background.h"
-#include "util.h"
+#include "Menu.h"
+#include "Background.h"
+#include "Util.h"
+#include "State.h"
 #include <string>
 #include <iostream>
 
-class Menu
+class Menu : public State
 {
 public:
     Menu(SDL_Window *mainWindow, std::string destinationOfImage);

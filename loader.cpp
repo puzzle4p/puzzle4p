@@ -1,5 +1,6 @@
 #include "SDL.h"
 #include "Menu.h"
+#include "Game.h"
 #include "Background.h"
 #include "Util.h"
 #include "stateManager.h"
@@ -15,12 +16,13 @@ int main(int argc, char* args[])
     std::string windowTitle = "puzzle4p";
 
     SDL_Window* mainWindow = SDL_CreateWindow(windowTitle.c_str(), 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
-    Menu menu(mainWindow, "hello.bmp");
+
+    State *states[2];
+    states[0] = new Menu(mainWindow, "hello.bmp");
+    states[1] = new Game();
 
     SDL_Event event;
-    stateManager state;
-    state.changeState(game); // to dziala
-    state.changeState(menu); // to nie
+
     while(!quit)
     {
         while(SDL_PollEvent(&event))
@@ -30,7 +32,8 @@ int main(int argc, char* args[])
                 int x = event.button.x;
                 int y = event.button.y;
 
-                menu.onMouseDown(event, x, y);
+                states[0]->onMouseDown(event, x, y);
+                states[1]->onMouseDown(event, x, y);
             }
             if(event.type == SDL_TEXTINPUT)
             {

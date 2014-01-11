@@ -7,7 +7,7 @@ void stateManager::update()
 
 void stateManager::onMouseDown(SDL_Event event, int pointerX, int pointerY)
 {
-    std::cout << "Mouse down in stateManager" << std::endl;
+    enumMapToStates[current_state]->onMouseDown(event, pointerX, pointerY);
 }
 
 void stateManager::changeState(global_States state)
@@ -26,4 +26,9 @@ void stateManager::changeState(global_States state)
     {
         std::cout << "menu";
     }
+}
+
+void stateManager::addToMap(global_States globalState, State* stateObject)
+{
+    enumMapToStates[globalState] = stateObject;
 }

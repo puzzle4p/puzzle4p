@@ -17,9 +17,12 @@ int main(int argc, char* args[])
 
     SDL_Window* mainWindow = SDL_CreateWindow(windowTitle.c_str(), 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 
-    State *states[2];
-    states[0] = new Menu(mainWindow, "hello.bmp");
-    states[1] = new Game();
+    stateManager state;
+
+    state.addToMap(STATE_MENU, new Menu(mainWindow, "hello.bmp"));
+    state.addToMap(STATE_GAME, new Game());
+
+    state.changeState(STATE_MENU);
 
     SDL_Event event;
 
@@ -32,12 +35,12 @@ int main(int argc, char* args[])
                 int x = event.button.x;
                 int y = event.button.y;
 
-                states[0]->onMouseDown(event, x, y);
-                states[1]->onMouseDown(event, x, y);
+                state.onMouseDown(event, x, y);
             }
             if(event.type == SDL_TEXTINPUT)
             {
                 std::cout << event.text.text;
+                state.changeState(STATE_GAME);
             }
             if(event.type == SDL_QUIT)
             {

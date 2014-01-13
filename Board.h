@@ -26,7 +26,7 @@ class Board
 		 *  
 		 *  \details Jako pomoc dla funkcji fillBoard()
 		 */
-		bool isValidTileHorizntal(int row, int column);
+		bool isValidTileHorizontal(int row, int column);
 		/**
 		 *  \brief Sprawdza (wertykalnie) czy nowo dodawana kafelka może być umieszczona na danej pozycji
 		 *  

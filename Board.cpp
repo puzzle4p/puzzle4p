@@ -1,4 +1,6 @@
 #include "Board.h"
+#include <algorithm>
+#include <iostream>
 
 Board::Board() 
 {
@@ -12,7 +14,9 @@ Board::Board()
 		}
 	}
 	fillBoard();
-	boardSurface = SDL_LoadBMP("board.bmp");
+	std::cout<<"TestB\n";
+	boardSurface = SDL_LoadBMP("Images\\board.bmp");
+	std::cout<<"TestB\n";
 }
 
 Board::~Board() 
@@ -48,22 +52,23 @@ void Board::fillBoard()
 				}
 				if(!isValidTile)
 				{
-					delete tile[i][j];
-					tile[i][j] = NULL;
+					delete tiles[i][j];
+					tiles[i][j] = NULL;
 				}
 			}
-			while(!isValidTile)
+			while(!isValidTile);
 		}
 	}
 	
 }
 
-bool Board::isValidTileHorizntal(int row, int column) 
+bool Board::isValidTileHorizontal(int row, int column) 
 {
 	if(column < 2)
 	{
 		return true;
 	}
+	std::cout<<tiles[row][column] -> color<<" "<<tiles[row][column - 1] -> color<<" "<<tiles[row][column - 2] -> color<<"\n";
 	if(*(tiles[row][column]) == *(tiles[row][column - 1]))
 	{
 		if(*(tiles[row][column]) == *(tiles[row][column - 2]))
@@ -106,9 +111,9 @@ void Board::onMouseDown(SDL_Event event)
 		{
 			for(int j = 0; j < 8; j++)
 			{
-				if(x > tiles[i][j] -> getX() && x < tiles[i][j] -> getX() + tiles[i][j] -> getWidth())
+				if(x > tiles[i][j] -> getWidth() * i && x < (tiles[i][j] -> getWidth() * i) + tiles[i][j] -> getWidth())
 				{
-					if(y > tiles[i][j] -> getY() && y < tiles[i][j] -> getY() + tiles[i][j] -> getHeight())
+					if(y > tiles[i][j] -> getHeight() * j && y < (tiles[i][j] -> getHeight() * j) + tiles[i][j] -> getHeight())
 					{
 						clickedTile = tiles[i][j];
 						clickedTileX = j;
@@ -178,38 +183,36 @@ void Board::tryToSwap(int row1, int column1, int row2, int column2)
 
 void Board::changePlaceOfTiles(int row, int column, direction dir) 
 {
-	if(isValidMove(row, column, dir)
+	if(dir == up)
 	{
-		if(dir == up)
+		if(row != 0)
 		{
-			if(row != 0)
-			{
-				std::swap(tiles[row][column], tiles[row - 1][column]);
-			}
+			std::swap(tiles[row][column], tiles[row - 1][column]);
 		}
-		else if(dir == down)
-		{	
-			if(row == 7)
-			{
-				std::swap(tiles[row][column], tiles[row + 1][column]);
-			}
-		}
-		else if(dir == left)
-		{
-			if(column == 0)
-			{
-				std::swap(tiles[row][column], tiles[row][column - 1]);
-			}
-		}
-		else if(dir == right)
-		{
-			if(column == 7)
-			{
-				std::swap(tiles[row][column], tiles[row][column + 1]);
-			}
-		}
-		update();
 	}
+	else if(dir == down)
+	{	
+		if(row == 7)
+		{
+			std::swap(tiles[row][column], tiles[row + 1][column]);
+		}
+	}
+	else if(dir == left)
+	{
+		if(column == 0)
+		{
+			std::swap(tiles[row][column], tiles[row][column - 1]);
+		}
+	}
+	else if(dir == right)
+	{
+		if(column == 7)
+		{
+			std::swap(tiles[row][column], tiles[row][column + 1]);
+		}
+	}
+	update();	
+
 }
 
 void Board::update() 
@@ -217,7 +220,6 @@ void Board::update()
 	if(checkIfMatch())
 	{
 		destroyTiles();
-		draw();
 		refillWithNewTiles();
 	}
 }
@@ -246,7 +248,7 @@ void Board::checkIfMatchHorizontal()
 	{
 		for(int j = 1; j < 8; j++)
 		{
-			if(*(tiles[i][j]) == *(tiles[i][j - 1])
+			if(*(tiles[i][j]) == *(tiles[i][j - 1]))
 			{
 				count++;
 			}
@@ -256,7 +258,7 @@ void Board::checkIfMatchHorizontal()
 				{
 					for (int k = count; k >= 0; k--)
 					{
-						toDestroy[i][j - 1 - count] = true;
+						tilesToDestroy[i][j - 1 - count] = true;
 					}
 				}
 				count = 0;
@@ -272,7 +274,7 @@ void Board::checkIfMatchVertical()
 	{
 		for(int j = 0; j < 8; j++)
 		{
-			if(*(tiles[i][j]) == *(tiles[i - 1][j])
+			if(*(tiles[i][j]) == *(tiles[i - 1][j]))
 			{
 				count++;
 			}
@@ -282,7 +284,7 @@ void Board::checkIfMatchVertical()
 				{
 					for (int k = count; k >= 0; k--)
 					{
-						toDestroy[i - 1 - count][j] = true;
+						tilesToDestroy[i - 1 - count][j] = true;
 					}
 				}
 				count = 0;

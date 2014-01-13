@@ -1,0 +1,2 @@
+Menu() - konstruktor przyjmuj¹cy dwa parametry. G³ówne okno oraz string, który odpowiada za adres do obrazu. Funkcja ta tworzy nowy obiekt Background, do którego przekazuje parametry.
+onMouseDown() - funkcja przyjmuj¹ca dwa parametry, wspó³rzêdne X i Y aktualnego po³o¿enia wskaŸnika myszy podczas gdy wciœniêty jest przycisk w stanie Menu.

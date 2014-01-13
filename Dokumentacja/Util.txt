@@ -1,0 +1,1 @@
+isPointInsideRect() - funkcja przyjmuje 6 parametrów typu int. Punkt X i Y aktualnego po³o¿enia wskaŸnika myszy oraz po³o¿enie obiektu (np. buttona) jak i jego wymiary. Nastêpnie zwraca wartoœæ true or false, w zale¿noœci czy wskaŸnik myszy znajduje siê na tym obiekcie, czy te¿ jest po za nim.

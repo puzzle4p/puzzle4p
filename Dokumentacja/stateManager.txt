@@ -1,0 +1,3 @@
+changeState() - funkcja z jednym argumentem, który przyjmuje wartoœæ enum global_States. Przejmuje argument i zmienia current_state na podany w argumencie.
+onMouseDown() - funkcja przyjmuj¹ca dwa parametry, wspó³rzêdne X i Y aktualnego po³o¿enia wskaŸnika myszy podczas gdy wciœniêty jest przycisk. A nastêpnie przekazuje te dane do odpowiedniej funkcji w zale¿noœci jaki jest current_state. Np. je¿eli Menu to uruchomi siê funkcja z klasy Menu.
+addToMap() - funkcja przyjmuje dwa parametry. Do mapy enumMapToStates przypisuje wskaŸnik do obiektu klasy i odpowiadaj¹ca jemu wartoœæ enum global_State.

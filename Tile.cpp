@@ -24,11 +24,11 @@ void Tile::draw(SDL_Surface* target, int x, int y)
 }
 int Tile::getWidth()
 {
-	return 60;
+	return images -> getImage(color) -> w;
 }
 int Tile::getHeight()
 {
-	return 60;
+	return images -> getImage(color) -> h;
 }
 bool Tile::operator ==(const Tile &t)
 {

@@ -4,17 +4,13 @@
 
 int main(int argc, char** argv)
 {
-	std::cout<<"Test\n";
 	bool isRunning = true;
 	Board* board = new Board();
-	std::cout<<"Test\n";
 	SDL_Window* window;
 	SDL_Init(SDL_INIT_VIDEO);
-	std::cout<<"Test\n";
 	window = SDL_CreateWindow("Puzzle", 100, 100, 480, 480, 0);
 	SDL_Surface* screen = SDL_GetWindowSurface(window);
 	SDL_Event e;
-	std::cout<<"Test\n";
 	if(window == NULL)
 		return 1;
 	
@@ -24,7 +20,6 @@ int main(int argc, char** argv)
 		{
 			if(e.type == SDL_MOUSEBUTTONDOWN)
 			{
-				std::cout<<"Click";
 				board -> onMouseDown(e);
 			}
 			else if(e.type == SDL_QUIT)
@@ -32,7 +27,7 @@ int main(int argc, char** argv)
 				isRunning = false;
 			}
 		}
-		
+		board -> update();
 		board -> draw(screen);
 		SDL_UpdateWindowSurface(window);
 	}

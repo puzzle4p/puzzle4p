@@ -6,17 +6,9 @@ Board::Board()
 {
 	tilesFactory = new TilesFactory();
 	previouslyClickedTile = NULL;
-	for (int i = 0; i < 8; i++) 
-	{
-		for(int j = 0; j < 8; j++)
-		{
-			tilesToDestroy[i][j] = false;
-		}
-	}
+	resetTilesToDestroy();
 	fillBoard();
-	std::cout<<"TestB\n";
 	boardSurface = SDL_LoadBMP("Images\\board.bmp");
-	std::cout<<"TestB\n";
 }
 
 Board::~Board() 
@@ -68,7 +60,6 @@ bool Board::isValidTileHorizontal(int row, int column)
 	{
 		return true;
 	}
-	std::cout<<tiles[row][column] -> color<<" "<<tiles[row][column - 1] -> color<<" "<<tiles[row][column - 2] -> color<<"\n";
 	if(*(tiles[row][column]) == *(tiles[row][column - 1]))
 	{
 		if(*(tiles[row][column]) == *(tiles[row][column - 2]))
@@ -116,16 +107,16 @@ void Board::onMouseDown(SDL_Event event)
 					if(y > tiles[i][j] -> getHeight() * j && y < (tiles[i][j] -> getHeight() * j) + tiles[i][j] -> getHeight())
 					{
 						clickedTile = tiles[i][j];
-						clickedTileX = j;
-						clickedTileY = i;
+						clickedTileX = i;
+						clickedTileY = j;
 					}
 				}
 				if(previouslyClickedTile != NULL)
 				{
 					if(previouslyClickedTile == tiles[i][j])
 					{
-						previouslyClickedTileX = j;
-						previouslyClickedTileY = i;
+						previouslyClickedTileX = i;
+						previouslyClickedTileY = j;
 					}
 				}
 			}
@@ -138,14 +129,15 @@ void Board::onMouseDown(SDL_Event event)
 				previouslyClickedTile = clickedTile;
 				clickedTile = NULL;
 			}
-			else
+			else if(previouslyClickedTile != clickedTile)
 			{
-				if(previouslyClickedTile != clickedTile)
-				{
 					tryToSwap(previouslyClickedTileX, previouslyClickedTileY, clickedTileX, clickedTileY);
 					previouslyClickedTile = NULL;
 					clickedTile = NULL;
-				}
+			}
+			else
+			{
+				previouslyClickedTile = NULL;
 			}
 		}
 		else 
@@ -192,40 +184,38 @@ void Board::changePlaceOfTiles(int row, int column, direction dir)
 	}
 	else if(dir == down)
 	{	
-		if(row == 7)
+		if(row != 7)
 		{
 			std::swap(tiles[row][column], tiles[row + 1][column]);
 		}
 	}
 	else if(dir == left)
 	{
-		if(column == 0)
+		if(column != 0)
 		{
 			std::swap(tiles[row][column], tiles[row][column - 1]);
 		}
 	}
 	else if(dir == right)
 	{
-		if(column == 7)
+		if(column != 7)
 		{
 			std::swap(tiles[row][column], tiles[row][column + 1]);
 		}
-	}
-	update();	
+	}	
 
 }
 
 void Board::update() 
 {
-	if(checkIfMatch())
-	{
-		destroyTiles();
-		refillWithNewTiles();
-	}
+	checkIfMatch();
+	destroyTiles();
+	refillWithNewTiles();
 }
 
 bool Board::checkIfMatch() 
 {
+	resetTilesToDestroy();
 	checkIfMatchHorizontal();
 	checkIfMatchVertical();
 	for(int i = 0; i < 8; i++)
@@ -258,7 +248,7 @@ void Board::checkIfMatchHorizontal()
 				{
 					for (int k = count; k >= 0; k--)
 					{
-						tilesToDestroy[i][j - 1 - count] = true;
+						tilesToDestroy[i][j - 1 - k] = true;
 					}
 				}
 				count = 0;
@@ -284,7 +274,7 @@ void Board::checkIfMatchVertical()
 				{
 					for (int k = count; k >= 0; k--)
 					{
-						tilesToDestroy[i - 1 - count][j] = true;
+						tilesToDestroy[i - 1 - k][j] = true;
 					}
 				}
 				count = 0;
@@ -301,9 +291,12 @@ void Board::destroyTiles()
 		{
 			if(tilesToDestroy[i][j])
 			{
-				delete tiles[i][j];
-				tiles[i][j] = NULL;
-				tilesToDestroy[i][j] = false;
+				if(tiles[i][j] != NULL)
+				{
+					delete tiles[i][j];
+					tiles[i][j] = NULL;
+					std::cout<<"Usunieto: "<<i<<" "<<j<<"\n";
+				}
 			}
 		}
 	}
@@ -318,19 +311,36 @@ void Board::refillWithNewTiles()
 			if(tiles[i][j] == NULL)
 			{
 				tiles[i][j] = tilesFactory -> createTile();
+				
 			}
 		}
 	}
-	update();
+	/*if(checkIfMatch())
+	{
+		update();
+	}*/
 }
 
+void Board::resetTilesToDestroy()
+{
+	for(int i = 0; i < 8; i++)
+	{
+		for(int j = 0; j < 8; j++)
+		{
+			tilesToDestroy[i][j] = false;
+		}
+	}
+}
 void Board::draw(SDL_Surface* targetSurface) 
 {
 	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 8; j++)
 		{
-			tiles[i][j] -> draw(boardSurface, tiles[i][j] -> getWidth() * i, tiles[i][j] -> getHeight() * j);
+			if(tiles[i][j] != NULL)
+			{
+				tiles[i][j] -> draw(boardSurface, tiles[i][j] -> getWidth() * i, tiles[i][j] -> getHeight() * j);
+			}
 		}
 	}
 	SDL_BlitSurface(boardSurface, NULL, targetSurface, NULL);

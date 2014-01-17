@@ -238,9 +238,21 @@ void Board::checkIfMatchHorizontal()
 	{
 		for(int j = 1; j < 8; j++)
 		{
-			if(*(tiles[i][j]) == *(tiles[i][j - 1]))
+			if(*(tiles[i][j]) == *(tiles[i][j - 1]) && j != 7)
 			{
 				count++;
+			}
+			else if(*(tiles[i][j]) == *(tiles[i][j - 1]) && j == 7)
+			{
+				count++;
+				if(count >= 2)
+				{
+					for (int k = count; k >= 0; k--)
+					{
+						tilesToDestroy[i][j - k] = true;
+					}
+				}
+				count = 0;
 			}
 			else
 			{
@@ -260,13 +272,25 @@ void Board::checkIfMatchHorizontal()
 void Board::checkIfMatchVertical() 
 {
 	int count = 0;
-	for(int i = 1; i < 8; i++)
+	for(int j = 0; j < 8; j++)
 	{
-		for(int j = 0; j < 8; j++)
+		for(int i = 1; i < 8; i++)
 		{
-			if(*(tiles[i][j]) == *(tiles[i - 1][j]))
+			if(*(tiles[i][j]) == *(tiles[i - 1][j]) && i != 7)
 			{
 				count++;
+			}
+			else if(*(tiles[i][j]) == *(tiles[i - 1][j]) && i == 7)
+			{
+				count++;
+				if(count >= 2)
+				{
+					for (int k = count; k >= 0; k--)
+					{
+						tilesToDestroy[i - k][j] = true;
+					}
+				}
+				count = 0;
 			}
 			else
 			{
@@ -280,6 +304,7 @@ void Board::checkIfMatchVertical()
 				count = 0;
 			}
 		}
+		
 	}
 }
 
@@ -295,7 +320,6 @@ void Board::destroyTiles()
 				{
 					delete tiles[i][j];
 					tiles[i][j] = NULL;
-					std::cout<<"Usunieto: "<<i<<" "<<j<<"\n";
 				}
 			}
 		}
@@ -315,10 +339,6 @@ void Board::refillWithNewTiles()
 			}
 		}
 	}
-	/*if(checkIfMatch())
-	{
-		update();
-	}*/
 }
 
 void Board::resetTilesToDestroy()
@@ -333,6 +353,10 @@ void Board::resetTilesToDestroy()
 }
 void Board::draw(SDL_Surface* targetSurface) 
 {
+	if(previouslyClickedTile != NULL)
+	{
+		previouslyClickedTile -> setHighlight(true);
+	}
 	for (int i = 0; i < 8; i++)
 	{
 		for (int j = 0; j < 8; j++)
@@ -344,4 +368,8 @@ void Board::draw(SDL_Surface* targetSurface)
 		}
 	}
 	SDL_BlitSurface(boardSurface, NULL, targetSurface, NULL);
+	if(previouslyClickedTile != NULL)
+	{
+		previouslyClickedTile -> setHighlight(false);
+	}
 }

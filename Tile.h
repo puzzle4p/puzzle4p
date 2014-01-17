@@ -9,15 +9,15 @@ class Tile
 	private:
 		SDL_Surface* tileImage;
 		int edgeLength;
-		ImgHolder* images;
+		bool isHighlighted;
 	public:
-	
+		static ImgHolder images;
 		Color color;
-		Tile(ImgHolder* imgH);
-		Tile(Color color, ImgHolder* imgH);
+		Tile();
+		Tile(Color color);
 		~Tile();
-		void setImgHolder(ImgHolder* imgH);
 		void draw(SDL_Surface* target, int x, int y);
+		void setHighlight(bool highlight);
 		int getWidth();
 		int getHeight();
 		bool operator ==(const Tile &t);

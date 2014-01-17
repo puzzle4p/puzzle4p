@@ -31,6 +31,7 @@ int main(int argc, char** argv)
 		board -> draw(screen);
 		SDL_UpdateWindowSurface(window);
 	}
+	delete board;
 	SDL_DestroyWindow(window);
     SDL_Quit();
 

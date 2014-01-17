@@ -5,10 +5,9 @@
 
 class TilesFactory
 {
-	private:
-		ImgHolder* imgH;
 	public:
 		TilesFactory();
+		TilesFactory(unsigned int seed);
 		Tile* createTile();
 		Tile* createTile(Color color);
 };

@@ -10,7 +10,7 @@ class ImgHolder
 		std::vector<SDL_Surface*> images;
 	public:
 		ImgHolder();
-		SDL_Surface* getImage(Color color);
+		SDL_Surface* getImage(int color);
 };
 
 #endif

@@ -1,1 +1,0 @@
-Background() - konstruktor przyjmuj¹cy dwa parametry. G³ówne okno i string ze œcie¿k¹ do obrazu. Wyœwietla w g³ównym oknie wczytany obraz jako t³o.

@@ -26,6 +26,7 @@ class Board
 		void changePlaceOfTiles(int row, int column, direction dir);
 		void fillBoard();
 		void refillWithNewTiles();
+		void moveTilesDown();
 		bool checkIfMatch();
 		void resetTilesToDestroy();
 	public:

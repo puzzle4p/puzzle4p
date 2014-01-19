@@ -328,6 +328,7 @@ void Board::destroyTiles()
 
 void Board::refillWithNewTiles() 
 {
+	moveTilesDown();
 	for(int i = 0; i < 8; i++)
 	{
 		for(int j = 0; j < 8; j++)
@@ -335,6 +336,24 @@ void Board::refillWithNewTiles()
 			if(tiles[i][j] == NULL)
 			{
 				tiles[i][j] = tilesFactory -> createTile();
+				
+			}
+		}
+	}
+}
+
+void Board::moveTilesDown()
+{
+	for(int i = 0; i < 8; i++)
+	{
+		for(int j = 0; j < 8; j++)
+		{
+			if(tiles[i][j] == NULL)
+			{
+				for(int k = j; k > 0; k--)
+				{
+					std::swap(tiles[i][k], tiles[i][k - 1]);
+				}
 				
 			}
 		}

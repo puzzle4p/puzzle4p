@@ -1,14 +1,22 @@
+//Tylko dla testów
 #include "Board.h"
 #include <SDL.h>
 #include <iostream>
+
+const int FPS = 30;
 
 int main(int argc, char** argv)
 {
 	bool isRunning = true;
 	Board* board = new Board();
+	
+	
 	SDL_Window* window;
 	SDL_Init(SDL_INIT_VIDEO);
 	window = SDL_CreateWindow("Puzzle", 100, 100, 480, 480, 0);
+	
+	Uint32 startTicks;
+	
 	SDL_Surface* screen = SDL_GetWindowSurface(window);
 	SDL_Event e;
 	if(window == NULL)
@@ -16,6 +24,7 @@ int main(int argc, char** argv)
 	
 	while(isRunning)
 	{
+		startTicks = SDL_GetTicks();
 		while(SDL_PollEvent(&e))
 		{
 			if(e.type == SDL_MOUSEBUTTONDOWN)
@@ -27,9 +36,14 @@ int main(int argc, char** argv)
 				isRunning = false;
 			}
 		}
+		
 		board -> update();
 		board -> draw(screen);
 		SDL_UpdateWindowSurface(window);
+		if(1000/FPS > SDL_GetTicks()-startTicks) 
+		{
+			SDL_Delay(1000/FPS-(SDL_GetTicks()-startTicks));
+        }
 	}
 	delete board;
 	SDL_DestroyWindow(window);

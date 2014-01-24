@@ -30,6 +30,10 @@ class Board
 		void moveTilesDown();
 		bool checkIfMatch();
 		void resetTilesToDestroy();
+		bool anyMoreMoves();
+		bool anyMoreMovesVertical();
+		bool anyMoreMovesHorizontal();
+		void destroyAllTiles();
 	public:
 		Board();
 		~Board();

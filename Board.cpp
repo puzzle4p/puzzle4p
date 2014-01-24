@@ -208,9 +208,18 @@ void Board::changePlaceOfTiles(int row, int column, direction dir)
 
 void Board::update() 
 {
-	checkIfMatch();
-	destroyTiles();
-	refillWithNewTiles();
+	if(anyMoreMoves())
+	{
+		checkIfMatch();
+		destroyTiles();
+		refillWithNewTiles();
+	}
+	else
+	{
+		std::cout<<"No more moves\n";
+		destroyAllTiles();
+		fillBoard();
+	}
 }
 
 bool Board::checkIfMatch() 
@@ -355,6 +364,106 @@ void Board::moveTilesDown()
 					std::swap(tiles[rowIndex][k], tiles[rowIndex][k - 1]);
 				}
 				
+			}
+		}
+	}
+}
+
+bool Board::anyMoreMoves()
+{
+	if(anyMoreMovesVertical())
+	{
+		return true;
+	}
+	else if(anyMoreMovesHorizontal())
+	{
+		return true;
+	}
+	return false;
+}
+
+bool Board::anyMoreMovesVertical()
+{
+	int counter = 0;
+	for(int columnIndex = 0; columnIndex < 8; columnIndex++)
+	{
+		for(int rowIndex = 1; rowIndex < 8; rowIndex++)
+		{
+			if(counter >= 2)
+			{
+				return true;
+			}
+			if(*(tiles[rowIndex][columnIndex]) == *(tiles[rowIndex - 1][columnIndex]))
+			{
+				counter++;
+			}
+			else
+			{
+				if(counter >= 1)
+				{
+					if(rowIndex < 7 && *(tiles[rowIndex - 1][columnIndex]) == *(tiles[rowIndex + 1][columnIndex]))
+					{
+						return true;
+					}
+					else if(rowIndex > 3 && *(tiles[rowIndex - 1][columnIndex]) == *(tiles[rowIndex - 4][columnIndex]))
+					{
+						return true;
+					}
+				}
+				counter = 0;
+			}
+		}
+		counter = 0;
+	}
+	return false;
+}
+
+bool Board::anyMoreMovesHorizontal()
+{
+	int counter = 0;
+	for(int rowIndex = 0; rowIndex < 8; rowIndex++)	
+	{
+		for(int columnIndex = 1; columnIndex < 8; columnIndex++)
+		{
+			if(counter >= 2)
+			{
+				return true;
+			}
+			if(*(tiles[rowIndex][columnIndex]) == *(tiles[rowIndex][columnIndex - 1]))
+			{
+				counter++;
+			}
+			else
+			{
+				if(counter >= 1)
+				{
+					if(columnIndex < 7 && *(tiles[rowIndex][columnIndex - 1]) == *(tiles[rowIndex][columnIndex + 1]))
+					{
+						return true;
+					}
+					else if(columnIndex > 3 && *(tiles[rowIndex][columnIndex - 1]) == *(tiles[rowIndex][columnIndex - 4]))
+					{
+						return true;
+					}
+				}
+				counter = 0;
+			}
+		}
+		counter = 0;
+	}
+	return false;
+}
+
+void Board::destroyAllTiles()
+{
+	for (int rowIndex = 0; rowIndex < 8; rowIndex++) 
+	{
+		for(int columnIndex = 0; columnIndex < 8; columnIndex++)
+		{
+			if(tiles[rowIndex][columnIndex] != NULL)
+			{
+				delete tiles[rowIndex][columnIndex];
+				tiles[rowIndex][columnIndex] = NULL;
 			}
 		}
 	}

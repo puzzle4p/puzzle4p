@@ -1,6 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 #include <SDL.h>
+#include <vector>
 #include "Tile.h"
 #include "TilesFactory.h"
 /**
@@ -10,9 +11,9 @@
 class Board 
 {
 	private:
-		Tile* tiles[8][8];
+		std::vector<std::vector<Tile*> > tiles;
 		TilesFactory* tilesFactory;
-		bool tilesToDestroy[8][8];
+		std::vector<std::vector<bool> > tilesToDestroy;
 		Tile* previouslyClickedTile;
 		enum direction {up, down, left, right};
 		SDL_Surface* boardSurface;

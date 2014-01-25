@@ -38,6 +38,8 @@
 			<Add option="-lmingw32 -lSDL2main -lSDL2 -lSDL2_image" />
 			<Add directory="E:/Utilities/cpp/MinGW/SDL 2.0/lib" />
 		</Linker>
+		<Unit filename="layer.cpp" />
+		<Unit filename="layer.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

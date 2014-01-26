@@ -9,5 +9,8 @@ Menu::Menu(SDL_Window *mainWindow, std::string destinationOfImage)
 
 void Menu::onMouseDown(int pointerX, int pointerY)
 {
-    std::cout << "Mouse down in menu" << std::endl;
+    if(isPointInsideRect(pointerX, pointerY, 100, 100, 100, 100))
+    {
+        std::cout << "X:" << pointerX << " Y:" << pointerY << std::endl;
+    }
 }

@@ -14,5 +14,4 @@ public:
     static void addToMap(global_States globalState, State* stateObject);
 private:
     static global_States current_state;
-
 };

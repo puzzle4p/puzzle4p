@@ -7,6 +7,11 @@
 #include "Background.h"
 #include "Util.h"
 #include "State.h"
+#include "Gui.h"
+#include "Button.h"
+#include "Layer.h"
+#include "Sprite.h"
+#include <vector>
 #include <string>
 #include <iostream>
 
@@ -19,6 +24,7 @@ public:
 private:
     Background *backgroundSurface;
     SDL_Surface *windowSurface;
+    std::vector<Button*> buttons;
 };
 
 #endif // MENU_H

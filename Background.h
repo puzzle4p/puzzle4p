@@ -1,7 +1,9 @@
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
 #include "SDL.h"
+#include "GUI.h"
 #include <string>
+#include "Button.h"
 
 class Background
 {

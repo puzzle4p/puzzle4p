@@ -6,6 +6,8 @@
 #include "stateManager.h"
 #include <iostream>
 #include <string>
+#include "Sprite.h"
+#include "Layer.h"
 
 
 int main(int argc, char* args[])

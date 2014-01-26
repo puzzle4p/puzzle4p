@@ -7,10 +7,9 @@
 class Button : public Gui
 {
 public:
-    Button(int x, int y, int width, int height, SDL_Surface *buttonSurface, SDL_Surface *windowSurface);
+    Button(int x, int y, int width, int height, std::string buttonImageDestination, SDL_Surface *windowSurface);
 private:
     SDL_Surface *buttonImage;
-    SDL_Rect rect;
 };
 
 #endif // BUTTON_H

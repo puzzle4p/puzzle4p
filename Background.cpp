@@ -4,7 +4,7 @@ Background::Background(SDL_Surface *windowSurface, std::string destinationOfImag
 {
     backgroundImage = SDL_LoadBMP(destinationOfImage.c_str());
 
-    SDL_BlitSurface(backgroundImage, NULL, windowSurface, NULL );
+    SDL_BlitSurface(backgroundImage, NULL, windowSurface, NULL);
 }
 
 Background::~Background()

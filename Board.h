@@ -11,6 +11,7 @@
 class Board 
 {
 	private:
+		const int size;
 		std::vector<std::vector<Tile*> > tiles;
 		TilesFactory* tilesFactory;
 		std::vector<std::vector<bool> > tilesToDestroy;
@@ -39,7 +40,7 @@ class Board
 		bool anyMoreMovesHorizontal();
 		void destroyAllTiles();
 	public:
-		Board();
+		Board(int _size);
 		~Board();
 		/**
 		 *  \brief Obsługuje kliknięcia myszą na kafelkach.

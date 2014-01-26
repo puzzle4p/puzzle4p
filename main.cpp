@@ -7,13 +7,14 @@ const int FPS = 30;
 
 int main(int argc, char** argv)
 {
+	int size = 12;
 	bool isRunning = true;
-	Board* board = new Board();
+	Board* board = new Board(size);
 	
 	
 	SDL_Window* window;
 	SDL_Init(SDL_INIT_VIDEO);
-	window = SDL_CreateWindow("Puzzle", 100, 100, 480, 480, 0);
+	window = SDL_CreateWindow("Puzzle", 100, 100, 60 * size, 60 * size, 0);
 	
 	Uint32 startTicks;
 	

@@ -25,6 +25,10 @@ class Board
 		void destroyTiles();
 		void tryToSwap(int row1, int column1, int row2, int column2);
 		void changePlaceOfTiles(int row, int column, direction dir);
+		void moveTileUp(int row, int column);
+		void moveTileDown(int row, int column);
+		void moveTileLeft(int row, int column);
+		void moveTileRight(int row, int column);
 		void fillBoard();
 		void refillWithNewTiles();
 		void moveTilesDown();

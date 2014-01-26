@@ -172,38 +172,73 @@ void Board::tryToSwap(int row1, int column1, int row2, int column2)
 	}
 }
 
-
 void Board::changePlaceOfTiles(int row, int column, direction dir) 
 {
-	if(dir == up)
+	switch(dir)
 	{
-		if(row != 0)
-		{
-			std::swap(tiles[row][column], tiles[row - 1][column]);
-		}
+		case up:
+			moveTileUp(row, column);
+			break;
+		case down:
+			moveTileDown(row, column);
+			break;
+		case left:
+			moveTileLeft(row, column);
+			break;
+		case right:
+			moveTileRight(row, column);
+			break;
 	}
-	else if(dir == down)
-	{	
-		if(row != 7)
-		{
-			std::swap(tiles[row][column], tiles[row + 1][column]);
-		}
-	}
-	else if(dir == left)
+	if(!checkIfMatch())
 	{
-		if(column != 0)
-		{
-			std::swap(tiles[row][column], tiles[row][column - 1]);
-		}
-	}
-	else if(dir == right)
+		switch(dir)
 	{
-		if(column != 7)
-		{
-			std::swap(tiles[row][column], tiles[row][column + 1]);
-		}
-	}	
+		case up:
+			moveTileUp(row, column);
+			break;
+		case down:
+			moveTileDown(row, column);
+			break;
+		case left:
+			moveTileLeft(row, column);
+			break;
+		case right:
+			moveTileRight(row, column);
+			break;
+	}
+	}
+}
 
+void Board::moveTileUp(int row, int column)
+{
+	if(row > 0)
+	{
+		std::swap(tiles[row][column], tiles[row - 1][column]);
+	}
+}
+
+void Board::moveTileDown(int row, int column)
+{
+	if(row < 7)
+	{
+		std::swap(tiles[row][column], tiles[row + 1][column]);
+	}
+}
+
+void Board::moveTileLeft(int row, int column)
+{
+	if(column > 0)
+	{
+		std::swap(tiles[row][column], tiles[row][column - 1]);
+	}
+}
+
+void Board::moveTileRight(int row, int column)
+{
+	if(column < 7)
+	{
+		std::swap(tiles[row][column], tiles[row][column + 1]);
+	}
 }
 
 void Board::update() 

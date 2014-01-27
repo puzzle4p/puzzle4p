@@ -17,12 +17,11 @@ int main(int argc, char* args[])
 	SDL_Surface *windowSurface = SDL_GetWindowSurface(mainWindow);
     SDL_Event event;
 
-	layerManager::addLayerToVector(new layer(1));
+	layerManager::addLayerToVector(1);
 	layerManager::layers[0]->addSprite(new sprite("red.bmp", 0, 0, 0, 100, 100));
-	layerManager::addLayerToVector(new layer(0));
+	layerManager::addLayerToVector(0);
 	layerManager::layers[1]->addSprite(new sprite("hello.bmp", 0, 0, 0, 100, 100));
 
-	layerManager::sortLayers();
 	layerManager::showLayers(windowSurface);
 
 	

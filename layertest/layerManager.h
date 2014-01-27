@@ -9,10 +9,12 @@
 class layerManager
 {
 public:
-	static void addLayerToVector(layer *l);
+	static void addLayerToVector(int priority);
 	static std::vector<layer *> layers;
-	static void sortLayers();
 	static void showLayers(SDL_Surface *windowSurface);
+	~layerManager();
+private:
+	static void sortLayers();
 };
 
 #endif //LAYERMANAGER_H

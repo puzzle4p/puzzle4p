@@ -18,6 +18,7 @@ public:
     std::vector<sprite*> sprites;
     void showSprites(SDL_Surface *windowSurface);
 	int layerPriority;
+	~layer();
 };
 
 #endif //LAYER_H

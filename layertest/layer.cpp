@@ -23,10 +23,15 @@ void layer::sortSprites()
     std::sort(sprites.begin(), sprites.end(), sortByPriority());
 }
 
-void layer::showSprites(SDL_Surface *windowSurface)
+void layer::showSprites(SDL_Renderer *renderer, SDL_Surface *windowSurface)
 {
     for(unsigned int i = 0; i < sprites.size(); i++)
     {
-        SDL_BlitSurface(sprites[i]->spriteSurface, NULL, windowSurface, &(sprites[i]->rect));
+		bitmapSurface = sprites[i]->spriteSurface;
+		bitmapTexture = SDL_CreateTextureFromSurface(renderer, bitmapSurface);
+		
+		SDL_RenderCopy(renderer, bitmapTexture, NULL, &(sprites[i]->rect));
+		SDL_FreeSurface(bitmapSurface);
     }
+	SDL_RenderPresent(renderer);
 }

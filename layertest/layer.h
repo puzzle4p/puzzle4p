@@ -16,9 +16,11 @@ public:
     void addSprite(sprite *s);
     void sortSprites();
     std::vector<sprite*> sprites;
-    void showSprites(SDL_Surface *windowSurface);
+	void showSprites(SDL_Renderer *renderer, SDL_Surface *windowSurface);
 	int layerPriority;
-	~layer();
+private:
+	SDL_Texture *bitmapTexture;
+	SDL_Surface *bitmapSurface;
 };
 
 #endif //LAYER_H

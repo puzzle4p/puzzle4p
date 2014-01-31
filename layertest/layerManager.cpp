@@ -5,7 +5,6 @@ std::vector<layer *> layerManager::layers;
 void layerManager::addLayerToVector(int priority)
 {
 	layers.push_back(new layer(priority));
-	sortLayers();
 }
 
 struct sortByPriority
@@ -21,11 +20,12 @@ void layerManager::sortLayers()
 	std::sort(layers.begin(), layers.end(), sortByPriority());
 }
 
-void layerManager::showLayers(SDL_Surface *windowSurface)
+void layerManager::showLayers(SDL_Renderer *renderer, SDL_Surface *windowSurface)
 {
+	sortLayers();
 	for (unsigned int i = 0; i < layers.size(); i++)
 	{
-		layers[i]->showSprites(windowSurface);
+		layers[i]->showSprites(renderer, windowSurface);
 	}
 }
 

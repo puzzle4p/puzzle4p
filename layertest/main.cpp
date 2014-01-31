@@ -15,31 +15,15 @@ int main(int argc, char* args[])
 
     SDL_Window *mainWindow = SDL_CreateWindow(windowTitle.c_str(), 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 	SDL_Surface *windowSurface = SDL_GetWindowSurface(mainWindow);
-    SDL_Event event;
+	SDL_Renderer *renderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED);
+	SDL_Event event;	
 
 	layerManager::addLayerToVector(1);
-	layerManager::layers[0]->addSprite(new sprite("red.bmp", 0, 0, 0, 100, 100));
+	layerManager::layers[0]->addSprite(new sprite("red.bmp", 0, 100, 0, 100, 100));
 	layerManager::addLayerToVector(0);
-	layerManager::layers[1]->addSprite(new sprite("hello.bmp", 0, 0, 0, 100, 100));
+	layerManager::layers[1]->addSprite(new sprite("hello.bmp", 0, 0, 0, 640, 480));
 
-	layerManager::showLayers(windowSurface);
-
-	
-	
-
-	
-
-
-
-    /*layer *l = new layer();
-    sprite *s1 = new sprite("red.bmp", 4, 100, 100, 100, 100);
-    l->addSprite(s1);
-    sprite *s2 = new sprite("hello.bmp", 1, 0, 0, 640, 480);
-    l->addSprite(s2);
-
-    l->sortSprites();
-    l->showSprites(windowSurface);*/
-    SDL_UpdateWindowSurface(mainWindow);
+	layerManager::showLayers(renderer, windowSurface);
 
     while(!quit)
     {
@@ -63,6 +47,8 @@ int main(int argc, char* args[])
         }
     }
 
+
+	SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow( mainWindow );
     mainWindow = NULL;
 

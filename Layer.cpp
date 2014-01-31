@@ -1,23 +1,37 @@
-#include "Layer.h"
+#include "layer.h"
 
-Layer::Layer(){}
+Layer::Layer(int priority)
+{
+	layerPriority = priority;
+}
 
 void Layer::addSprite(Sprite *s)
 {
-    std::cout << s->destinationOfImage << " / " << s->priority << " / " << s << "\n";
-    sprites.push_back(s);
+	sprites.push_back(s);
 }
 
 struct sortByPriority
 {
-    bool operator()(Sprite *i, Sprite *j)
-    {
-        return i->priority < j->priority;
-    }
+	bool operator()(Sprite *i, Sprite *j)
+	{
+		return i->priority < j->priority;
+	}
 };
 
 void Layer::sortSprites()
 {
-    std::sort(sprites.begin(), sprites.end(), sortByPriority());
+	std::sort(sprites.begin(), sprites.end(), sortByPriority());
 }
 
+void Layer::showSprites(SDL_Renderer *renderer, SDL_Surface *windowSurface)
+{
+	for (std::vector<Sprite *>::iterator it = sprites.begin(); it != sprites.end(); ++it)
+	{
+		bitmapSurface = (*it)->spriteSurface;
+		bitmapTexture = SDL_CreateTextureFromSurface(renderer, bitmapSurface);
+
+		SDL_RenderCopy(renderer, bitmapTexture, NULL, &((*it)->rect));
+		SDL_FreeSurface(bitmapSurface);
+	}
+	SDL_RenderPresent(renderer);
+}

@@ -7,11 +7,11 @@
 class Sprite
 {
 public:
-    Sprite(std::string dest, int prior);
-    int priority;
-    std::string destinationOfImage;
-private:
-    SDL_Surface *spriteSurface;
+	Sprite(std::string dest, int prior, int x, int y, int width, int height);
+	int priority;
+	std::string destinationOfImage;
+	SDL_Surface *spriteSurface;
+	SDL_Rect rect;
 };
 
 #endif // SPRITE_H

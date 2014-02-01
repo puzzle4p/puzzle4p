@@ -1,7 +1,9 @@
+#ifndef STATEMANAGER_H
+#define STATEMANAGER_H
+
 #include "Util.h"
 #include "SDL.h"
 #include "State.h"
-#include <iostream>
 #include <map>
 
 class stateManager
@@ -15,3 +17,5 @@ public:
 private:
     static global_States current_state;
 };
+
+#endif //STATEMANAGER_H

@@ -23,11 +23,11 @@ void stateManager::changeState(global_States state)
 
     if(current_state == STATE_GAME)
     {
-        std::cout << "CHANGE STATE TO GAME" << std::endl;
+        
     }
     else
     {
-        std::cout << "CHANGE STATE TO MENU" << std::endl;
+        
     }
 }
 

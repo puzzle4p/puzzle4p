@@ -4,8 +4,6 @@
 #include "SDL.h"
 #include "Sprite.h"
 #include <vector>
-#include <string>
-#include <iostream>
 #include <algorithm>
 
 

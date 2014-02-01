@@ -1,16 +1,16 @@
 #include "Menu.h"
 
-Menu::Menu(SDL_Window *mainWindow, std::string destinationOfImage)
+Menu::Menu(SDL_Surface *windowSurface, std::string destinationOfImage)
 {
-    windowSurface = SDL_GetWindowSurface(mainWindow);
     backgroundSurface = new Background(windowSurface, destinationOfImage);
-    SDL_UpdateWindowSurface(mainWindow);
+	layerManager::layers[1]->addSprite(new Sprite("red.bmp", 0, 100, 100, 100, 100));
+	b = new Button(100, 100, 100, 100);
 }
 
 void Menu::onMouseDown(int pointerX, int pointerY)
 {
-    if(isPointInsideRect(pointerX, pointerY, 100, 100, 100, 100))
-    {
-        std::cout << "X:" << pointerX << " Y:" << pointerY << std::endl;
-    }
+	if (isPointInsideRectFromCorner(pointerX, pointerY, b->rect))
+	{
+		
+	}
 }

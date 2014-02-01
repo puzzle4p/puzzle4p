@@ -12,6 +12,7 @@ public:
 	std::string destinationOfImage;
 	SDL_Surface *spriteSurface;
 	SDL_Rect rect;
+	void checkIfClicked();
 };
 
 #endif // SPRITE_H

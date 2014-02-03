@@ -9,7 +9,7 @@
 class layerManager
 {
 public:
-	static void addLayerToVector(int priority);
+	static Layer* addLayer(int priority);
 	static std::vector<Layer *> layers;
 	static void setRenderer(SDL_Renderer *renderer, SDL_Surface *mainWindowSurface);
 	static void showLayers();

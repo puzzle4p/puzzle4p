@@ -4,11 +4,14 @@ std::vector<Layer *> layerManager::layers;
 SDL_Renderer *layerManager::renderer;
 SDL_Surface *layerManager::windowSurface;
 
-void layerManager::addLayerToVector(int priority)
+Layer* layerManager::addLayer(int priority)
 {
-	layers.push_back(new Layer(priority));
+	Layer *layer = new Layer(priority);
+	layers.push_back(layer);
+	return layer;
 }
 
+//sortowanie tylko chwilowo
 struct sortByPriority
 {
 	bool operator()(Layer *i, Layer *j)
@@ -17,6 +20,7 @@ struct sortByPriority
 	}
 };
 
+//sortowanie tylko chwilowo
 void layerManager::sortLayers()
 {
 	std::sort(layers.begin(), layers.end(), sortByPriority());

@@ -19,37 +19,41 @@ int main(int argc, char* args[])
 	SDL_Surface *windowSurface = SDL_GetWindowSurface(mainWindow);
 
 	layerManager::setRenderer(renderer, windowSurface);
-	layerManager::addLayerToVector(0);
-	layerManager::addLayerToVector(1);
 
-	stateManager::addToMap(STATE_MENU, new Menu(windowSurface, destinationOfImage));
-	stateManager::addToMap(STATE_GAME, new Game());
+	State *newMenu = new Menu(windowSurface, destinationOfImage);
+	State *newGame = new Game();
+
+	stateManager::addToMap(STATE_MENU, newMenu);
+	stateManager::addToMap(STATE_GAME, newGame);
 	stateManager::changeState(STATE_MENU);
 
-	
 	layerManager::showLayers();
 
 	SDL_Event event;
+	
+	Uint32 currentTicks = SDL_GetTicks();
+	const int ticksPerSecond = 1000;
+	const int framesPerSecond = 60;
 
 	while (!quit)
 	{
-		Uint32 now = SDL_GetTicks();
-		
-		int delay = 1000 / 60 - (SDL_GetTicks() - now);
-		if (delay > 0) SDL_Delay(delay);
+		currentTicks = SDL_GetTicks();
+
+		int delay = ticksPerSecond / framesPerSecond - (SDL_GetTicks() - currentTicks);
+		if (delay > 0)
+		{
+			SDL_Delay(delay);
+		}
 
 		while (SDL_PollEvent(&event))
 		{
 			if (event.type == SDL_MOUSEBUTTONDOWN)
-			{
-				int x = event.button.x;
-				int y = event.button.y;
-				
-				stateManager::onMouseDown(x, y);
+			{				
+				stateManager::onMouseDown(event.button.x, event.button.y);
 			}
 			if (event.type == SDL_TEXTINPUT)
 			{
-				stateManager::changeState(STATE_GAME);
+				stateManager::onPressDown(); // funkcja do zrobienia jeszcze
 			}
 			if (event.type == SDL_QUIT)
 			{
@@ -57,6 +61,10 @@ int main(int argc, char* args[])
 			}
 		}
 	}
+
+
+	delete newGame;
+	delete newMenu;
 
 	SDL_DestroyWindow(mainWindow);
 	mainWindow = NULL;

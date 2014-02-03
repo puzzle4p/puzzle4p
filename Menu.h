@@ -5,7 +5,6 @@
 #include "Background.h"
 #include "Util.h"
 #include "State.h"
-#include "Button.h"
 #include "layerManager.h"
 #include "Sprite.h"
 #include <vector>
@@ -18,9 +17,9 @@ public:
     ~Menu();
     void onMouseDown(int pointerX, int pointerY);
 private:
+	Layer *layerButton;
+	Sprite *buttonSprite;
     Background *backgroundSurface;
-    std::vector<Button*> buttons;
-	Button *b;
 };
 
 #endif // MENU_H

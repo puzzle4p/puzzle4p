@@ -10,6 +10,7 @@ void Layer::addSprite(Sprite *s)
 	sprites.push_back(s);
 }
 
+//sortowanie tylko chwilowo
 struct sortByPriority
 {
 	bool operator()(Sprite *i, Sprite *j)
@@ -18,6 +19,7 @@ struct sortByPriority
 	}
 };
 
+//sortowanie tylko chwilowo
 void Layer::sortSprites()
 {
 	std::sort(sprites.begin(), sprites.end(), sortByPriority());
@@ -30,7 +32,7 @@ void Layer::showSprites(SDL_Renderer *renderer, SDL_Surface *windowSurface)
 		bitmapSurface = (*it)->spriteSurface;
 		bitmapTexture = SDL_CreateTextureFromSurface(renderer, bitmapSurface);
 
-		SDL_RenderCopy(renderer, bitmapTexture, NULL, &((*it)->rect));
+		SDL_RenderCopy(renderer, bitmapTexture, NULL, &((*it)->mainRect));
 		SDL_FreeSurface(bitmapSurface);
 	}
 	SDL_RenderPresent(renderer);

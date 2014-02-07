@@ -7,11 +7,13 @@ Tile::Tile()
 {
 	color = static_cast<Color>(rand() % 5);
 	isHighlighted = false;
+	//toDestroy = false;
 }
 Tile::Tile(Color color)
 {
 	this -> color = color;
 	isHighlighted = false;
+	//toDestroy = false;
 }
 Tile::~Tile()
 {
@@ -32,11 +34,11 @@ void Tile::draw(SDL_Surface* target, int x, int y)
 }
 int Tile::getWidth()
 {
-	return Tile::images.getImage(color) -> w;
+	return 60;
 }
 int Tile::getHeight()
 {
-	return Tile::images.getImage(color) -> h;
+	return 60;
 }
 void Tile::setHighlight(bool highlight)
 {

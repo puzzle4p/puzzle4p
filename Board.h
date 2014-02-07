@@ -4,11 +4,12 @@
 #include <vector>
 #include "Tile.h"
 #include "TilesFactory.h"
+#include "Direction.h"
 /**
  *  \file Board.h
  *  \brief Plansza do gry typu Puzzle Quest
  */
-class Board 
+class Board
 {
 	private:
 		const int size;
@@ -16,20 +17,20 @@ class Board
 		TilesFactory* tilesFactory;
 		std::vector<std::vector<bool> > tilesToDestroy;
 		Tile* previouslyClickedTile;
-		enum direction {up, down, left, right};
 		SDL_Surface* boardSurface;
+		SDL_Surface* targetSurface;
 	private:
+	    bool isValidTile(int row, int column);
 		bool isValidTileHorizontal(int row, int column);
 		bool isValidTileVertical(int row, int column);
 		void checkIfMatchHorizontal();
 		void checkIfMatchVertical();
 		void destroyTiles();
-		void tryToSwap(int row1, int column1, int row2, int column2);
+		void tryToSwap(Tile* firstTile, Tile* secondTile);
 		void changePlaceOfTiles(int row, int column, direction dir);
-		void moveTileUp(int row, int column);
-		void moveTileDown(int row, int column);
-		void moveTileLeft(int row, int column);
-		void moveTileRight(int row, int column);
+		Tile* whichTileHasBeenClicked(int x, int y);
+		void findRowAndColumnIndex(Tile* tile, int &destRow, int &destColumn);
+		void moveTile(int row, int column, int deltaRow, int deltaColumn);
 		void fillBoard();
 		void refillWithNewTiles();
 		void moveTilesDown();
@@ -40,23 +41,23 @@ class Board
 		bool anyMoreMovesHorizontal();
 		void destroyAllTiles();
 	public:
-		Board(int _size);
+		Board(int _size, SDL_Surface* _targetSurface);
 		~Board();
 		/**
 		 *  \brief Obsługuje kliknięcia myszą na kafelkach.
-		 *  
+		 *
 		 *  \param [in] event - SDL_Event
-		 *  
+		 *
 		 *  \details Należy wywoływać z klasy sprawującej kontrolę nad zdarzeniami SDL
 		 */
 		void onMouseDown(SDL_Event event);
 		/**
 		 *  \brief Rysuje plansze do  gry wraz z kafelkami
-		 *  
+		 *
 		 *  \param [in] targetSurface Powierzchnia na której ma być narysowana plansza
-		 *  
+		 *
 		 */
-		void draw(SDL_Surface* targetSurface);
+		void draw();
 		void update();
 };
 #endif

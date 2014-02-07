@@ -1,22 +1,23 @@
 #include "Board.h"
 #include <algorithm>
 #include <iostream>
-Board::Board(int _size):
+Board::Board(int _size, SDL_Surface* _targetSurface):
 size(_size),
 tiles(size, std::vector<Tile*>(size)),
 tilesToDestroy(size, std::vector<bool>(size, false))
 {
 	tilesFactory = new TilesFactory();
+	targetSurface = _targetSurface;
 	previouslyClickedTile = NULL;
 	fillBoard();
 	boardSurface = SDL_CreateRGBSurface(0, size * 60, size * 60, 32, 0, 0, 0, 0);
 
 }
 
-Board::~Board() 
+Board::~Board()
 {
 	delete tilesFactory;
-	for (int rowIndex = 0; rowIndex < size; rowIndex++) 
+	for (int rowIndex = 0; rowIndex < size; rowIndex++)
 	{
 		for(int columnIndex = 0; columnIndex < size; columnIndex++)
 		{
@@ -25,105 +26,77 @@ Board::~Board()
 	}
 }
 
-void Board::fillBoard() 
+void Board::fillBoard()
 {
+    bool validTile;
 	for(int rowIndex = 0; rowIndex < size; rowIndex++)
 	{
 		for(int columnIndex = 0; columnIndex < size; columnIndex++)
 		{
-			bool isValidTile;
 			do
 			{
-				isValidTile = true;
 				tiles[rowIndex][columnIndex] = tilesFactory -> createTile();
-				if(!isValidTileHorizontal(rowIndex, columnIndex))
-				{
-					isValidTile = false;
-				}
-				else if(!isValidTileVertical(rowIndex, columnIndex))
-				{
-					isValidTile = false;
-				}
-				if(!isValidTile)
+				validTile = isValidTile(rowIndex, columnIndex);
+
+				if(!validTile)
 				{
 					delete tiles[rowIndex][columnIndex];
 					tiles[rowIndex][columnIndex] = NULL;
 				}
 			}
-			while(!isValidTile);
+			while(!validTile);
 		}
 	}
-	
 }
 
-bool Board::isValidTileHorizontal(int row, int column) 
+bool Board::isValidTile(int row, int column)
 {
-	if(column < 2)
-	{
-		return true;
-	}
-	if(*(tiles[row][column]) == *(tiles[row][column - 1]))
-	{
-		if(*(tiles[row][column]) == *(tiles[row][column - 2]))
-		{
-			return false;
-		}
-	}
-	return true;	
+    return (isValidTileHorizontal(row, column) && isValidTileVertical(row, column));
 }
 
-bool Board::isValidTileVertical(int row, int column) 
+bool Board::isValidTileHorizontal(int row, int column)
 {
-	if(row < 2)
+    bool returnValue = true;
+	if(column >= 2)
 	{
-		return true;
+		if(*(tiles[row][column]) == *(tiles[row][column - 1]))
+        {
+            if(*(tiles[row][column]) == *(tiles[row][column - 2]))
+            {
+                returnValue = false;
+            }
+        }
 	}
-	if(*(tiles[row][column]) == *(tiles[row - 1][column]))
-	{
-		if(*(tiles[row][column]) == *(tiles[row - 2][column]))
-		{
-			return false;
-		}
-	}
-	return true;
+
+	return returnValue;
 }
 
-void Board::onMouseDown(SDL_Event event) 
+bool Board::isValidTileVertical(int row, int column)
+{
+    bool returnValue = true;
+	if(row >= 2)
+	{
+        if(*(tiles[row][column]) == *(tiles[row - 1][column]))
+        {
+            if(*(tiles[row][column]) == *(tiles[row - 2][column]))
+            {
+                returnValue = false;
+            }
+        }
+	}
+
+	return returnValue;
+}
+void Board::onMouseDown(SDL_Event event)
 {
 	if(event.type == SDL_MOUSEBUTTONDOWN)
 	{
 		int x = event.button.x;
 		int y = event.button.y;
 		Tile* clickedTile = NULL;
-		int previouslyClickedTileRow;
-		int previouslyClickedTileColumn;
-		int clickedTileRow;
-		int clickedTileColumn;
-		
-		for(int rowIndex = 0; rowIndex < size; rowIndex++)
-		{
-			for(int columnIndex = 0; columnIndex < size; columnIndex++)
-			{
-				if(x > tiles[rowIndex][columnIndex] -> getWidth() * rowIndex && x < (tiles[rowIndex][columnIndex] -> getWidth() * rowIndex) + tiles[rowIndex][columnIndex] -> getWidth())
-				{
-					if(y > tiles[rowIndex][columnIndex] -> getHeight() * columnIndex && y < (tiles[rowIndex][columnIndex] -> getHeight() * columnIndex) + tiles[rowIndex][columnIndex] -> getHeight())
-					{
-						clickedTile = tiles[rowIndex][columnIndex];
-						clickedTileRow = rowIndex;
-						clickedTileColumn = columnIndex;
-					}
-				}
-				if(previouslyClickedTile != NULL)
-				{
-					if(previouslyClickedTile == tiles[rowIndex][columnIndex])
-					{
-						previouslyClickedTileRow = rowIndex;
-						previouslyClickedTileColumn = columnIndex;
-					}
-				}
-			}
-		}
-		
+
+        clickedTile = whichTileHasBeenClicked(x, y);
+
 		if(clickedTile != NULL)
 		{
 			if(previouslyClickedTile == NULL)
@@ -133,7 +106,7 @@ void Board::onMouseDown(SDL_Event event)
 			}
 			else if(previouslyClickedTile != clickedTile)
 			{
-					tryToSwap(previouslyClickedTileRow, previouslyClickedTileColumn, clickedTileRow, clickedTileColumn);
+					tryToSwap(previouslyClickedTile, clickedTile);
 					previouslyClickedTile = NULL;
 					clickedTile = NULL;
 			}
@@ -142,16 +115,39 @@ void Board::onMouseDown(SDL_Event event)
 				previouslyClickedTile = NULL;
 			}
 		}
-		else 
+		else
 		{
 			previouslyClickedTile = NULL;
 		}
 	}
 }
 
-void Board::tryToSwap(int row1, int column1, int row2, int column2) 
+Tile* Board::whichTileHasBeenClicked(int x, int y)
+{
+    Tile* clickedTile = NULL;
+
+    for(int rowIndex = 0; rowIndex < size; rowIndex++)
+    {
+        for(int columnIndex = 0; columnIndex < size; columnIndex++)
+        {
+            if(x > tiles[rowIndex][columnIndex] -> getWidth() * rowIndex && x < (tiles[rowIndex][columnIndex] -> getWidth() * rowIndex) + tiles[rowIndex][columnIndex] -> getWidth())
+            {
+                if(y > tiles[rowIndex][columnIndex] -> getHeight() * columnIndex && y < (tiles[rowIndex][columnIndex] -> getHeight() * columnIndex) + tiles[rowIndex][columnIndex] -> getHeight())
+                {
+                    clickedTile = tiles[rowIndex][columnIndex];
+                }
+            }
+        }
+    }
+    return clickedTile;
+}
+
+void Board::tryToSwap(Tile* firstTile, Tile* secondTile)
 {
 	direction dir;
+	int row1, row2, column1, column2;
+	findRowAndColumnIndex(firstTile, row1, column1);
+	findRowAndColumnIndex(secondTile, row2, column2);
 	if(row1 == row2 + 1 && column1 == column2)
 	{
 		dir = up;
@@ -174,21 +170,37 @@ void Board::tryToSwap(int row1, int column1, int row2, int column2)
 	}
 }
 
-void Board::changePlaceOfTiles(int row, int column, direction dir) 
+void Board::findRowAndColumnIndex(Tile* tile, int &destRow, int &destColumn)
+{
+    for (int rowIndex = 0; rowIndex < size; rowIndex++)
+	{
+		for(int columnIndex = 0; columnIndex < size; columnIndex++)
+		{
+			if(tile == tiles[rowIndex][columnIndex])
+            {
+                destRow = rowIndex;
+                destColumn = columnIndex;
+                break;
+            }
+		}
+	}
+}
+
+void Board::changePlaceOfTiles(int row, int column, direction dir)
 {
 	switch(dir)
 	{
 		case up:
-			moveTileUp(row, column);
+			moveTile(row, column, -1, 0);
 			break;
 		case down:
-			moveTileDown(row, column);
+			moveTile(row, column, 1, 0);
 			break;
 		case left:
-			moveTileLeft(row, column);
+			moveTile(row, column, 0, -1);
 			break;
 		case right:
-			moveTileRight(row, column);
+			moveTile(row, column, 0, 1);
 			break;
 	}
 	if(!checkIfMatch())
@@ -196,59 +208,33 @@ void Board::changePlaceOfTiles(int row, int column, direction dir)
 		switch(dir)
 		{
 			case up:
-				moveTileUp(row, column);
+				moveTile(row, column, -1, 0);
 				break;
 			case down:
-				moveTileDown(row, column);
+				moveTile(row, column, 1, 0);
 				break;
 			case left:
-				moveTileLeft(row, column);
+				moveTile(row, column, 0, -1);
 				break;
 			case right:
-				moveTileRight(row, column);
+				moveTile(row, column, 0, 1);
 				break;
 		}
 	}
 }
 
-void Board::moveTileUp(int row, int column)
+void Board::moveTile(int row, int column, int deltaRow, int deltaColumn)
 {
-	if(row > 0)
-	{
-		std::swap(tiles[row][column], tiles[row - 1][column]);
-	}
+    std::swap(*tiles[row][column], *tiles[row + deltaRow][column + deltaColumn]);
 }
 
-void Board::moveTileDown(int row, int column)
-{
-	if(row < size - 1)
-	{
-		std::swap(tiles[row][column], tiles[row + 1][column]);
-	}
-}
-
-void Board::moveTileLeft(int row, int column)
-{
-	if(column > 0)
-	{
-		std::swap(tiles[row][column], tiles[row][column - 1]);
-	}
-}
-
-void Board::moveTileRight(int row, int column)
-{
-	if(column < size - 1)
-	{
-		std::swap(tiles[row][column], tiles[row][column + 1]);
-	}
-}
-
-void Board::update() 
+void Board::update()
 {
 	if(anyMoreMoves())
 	{
 		checkIfMatch();
 		destroyTiles();
+        moveTilesDown();
 		refillWithNewTiles();
 	}
 	else
@@ -257,10 +243,12 @@ void Board::update()
 		destroyAllTiles();
 		fillBoard();
 	}
+	draw();
 }
 
-bool Board::checkIfMatch() 
+bool Board::checkIfMatch()
 {
+    bool returnValue = false;
 	resetTilesToDestroy();
 	checkIfMatchHorizontal();
 	checkIfMatchVertical();
@@ -270,14 +258,15 @@ bool Board::checkIfMatch()
 		{
 			if(tilesToDestroy[rowIndex][columnIndex])
 			{
-				return true;
+			    returnValue = true;
+				break;
 			}
 		}
 	}
-	return false;
+	return returnValue;
 }
 
-void Board::checkIfMatchHorizontal() 
+void Board::checkIfMatchHorizontal()
 {
 	int count = 0;
 	for(int rowIndex = 0; rowIndex < size; rowIndex++)
@@ -314,8 +303,8 @@ void Board::checkIfMatchHorizontal()
 		}
 	}
 }
-	
-void Board::checkIfMatchVertical() 
+
+void Board::checkIfMatchVertical()
 {
 	int count = 0;
 	for(int columnIndex = 0; columnIndex < size; columnIndex++)
@@ -350,31 +339,27 @@ void Board::checkIfMatchVertical()
 				count = 0;
 			}
 		}
-		
+
 	}
 }
 
-void Board::destroyTiles() 
+void Board::destroyTiles()
 {
 	for(int rowIndex = 0; rowIndex < size; rowIndex++)
 	{
 		for(int columnIndex = 0; columnIndex < size; columnIndex++)
 		{
-			if(tilesToDestroy[rowIndex][columnIndex])
+			if(tilesToDestroy[rowIndex][columnIndex] && tiles[rowIndex][columnIndex] != NULL)
 			{
-				if(tiles[rowIndex][columnIndex] != NULL)
-				{
-					delete tiles[rowIndex][columnIndex];
-					tiles[rowIndex][columnIndex] = NULL;
-				}
+                delete tiles[rowIndex][columnIndex];
+                tiles[rowIndex][columnIndex] = NULL;
 			}
 		}
 	}
 }
 
-void Board::refillWithNewTiles() 
+void Board::refillWithNewTiles()
 {
-	moveTilesDown();
 	for(int rowIndex = 0; rowIndex < size; rowIndex++)
 	{
 		for(int columnIndex = 0; columnIndex < size; columnIndex++)
@@ -382,7 +367,7 @@ void Board::refillWithNewTiles()
 			if(tiles[rowIndex][columnIndex] == NULL)
 			{
 				tiles[rowIndex][columnIndex] = tilesFactory -> createTile();
-				
+
 			}
 		}
 	}
@@ -400,27 +385,19 @@ void Board::moveTilesDown()
 				{
 					std::swap(tiles[rowIndex][k], tiles[rowIndex][k - 1]);
 				}
-				
-			}
+            }
 		}
 	}
 }
 
 bool Board::anyMoreMoves()
 {
-	if(anyMoreMovesVertical())
-	{
-		return true;
-	}
-	else if(anyMoreMovesHorizontal())
-	{
-		return true;
-	}
-	return false;
+	return(anyMoreMovesHorizontal() || anyMoreMovesVertical());
 }
 
 bool Board::anyMoreMovesVertical()
 {
+    bool returnValue = false;
 	int counter = 0;
 	for(int columnIndex = 0; columnIndex < size; columnIndex++)
 	{
@@ -428,7 +405,8 @@ bool Board::anyMoreMovesVertical()
 		{
 			if(counter >= 2)
 			{
-				return true;
+				returnValue = true;
+				break;
 			}
 			if(*(tiles[rowIndex][columnIndex]) == *(tiles[rowIndex - 1][columnIndex]))
 			{
@@ -440,11 +418,13 @@ bool Board::anyMoreMovesVertical()
 				{
 					if(rowIndex < size - 1 && *(tiles[rowIndex - 1][columnIndex]) == *(tiles[rowIndex + 1][columnIndex]))
 					{
-						return true;
+						returnValue = true;
+                        break;
 					}
 					else if(rowIndex > 3 && *(tiles[rowIndex - 1][columnIndex]) == *(tiles[rowIndex - 4][columnIndex]))
 					{
-						return true;
+						returnValue = true;
+                        break;
 					}
 				}
 				counter = 0;
@@ -452,19 +432,21 @@ bool Board::anyMoreMovesVertical()
 		}
 		counter = 0;
 	}
-	return false;
+	return returnValue;
 }
 
 bool Board::anyMoreMovesHorizontal()
 {
+    bool returnValue = false;
 	int counter = 0;
-	for(int rowIndex = 0; rowIndex < size; rowIndex++)	
+	for(int rowIndex = 0; rowIndex < size; rowIndex++)
 	{
 		for(int columnIndex = 1; columnIndex < size; columnIndex++)
 		{
 			if(counter >= 2)
 			{
-				return true;
+				returnValue = true;
+				break;
 			}
 			if(*(tiles[rowIndex][columnIndex]) == *(tiles[rowIndex][columnIndex - 1]))
 			{
@@ -476,11 +458,13 @@ bool Board::anyMoreMovesHorizontal()
 				{
 					if(columnIndex < size - 1 && *(tiles[rowIndex][columnIndex - 1]) == *(tiles[rowIndex][columnIndex + 1]))
 					{
-						return true;
+						returnValue = true;
+                        break;
 					}
 					else if(columnIndex > 3 && *(tiles[rowIndex][columnIndex - 1]) == *(tiles[rowIndex][columnIndex - 4]))
 					{
-						return true;
+						returnValue = true;
+                        break;
 					}
 				}
 				counter = 0;
@@ -488,12 +472,12 @@ bool Board::anyMoreMovesHorizontal()
 		}
 		counter = 0;
 	}
-	return false;
+	return returnValue;
 }
 
 void Board::destroyAllTiles()
 {
-	for (int rowIndex = 0; rowIndex < size; rowIndex++) 
+	for (int rowIndex = 0; rowIndex < size; rowIndex++)
 	{
 		for(int columnIndex = 0; columnIndex < size; columnIndex++)
 		{
@@ -516,7 +500,7 @@ void Board::resetTilesToDestroy()
 		}
 	}
 }
-void Board::draw(SDL_Surface* targetSurface) 
+void Board::draw()
 {
 	SDL_Rect background;
 	background.x = 0;

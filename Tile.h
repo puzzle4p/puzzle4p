@@ -11,6 +11,7 @@ class Tile
 		int edgeLength;
 		bool isHighlighted;
 	public:
+		//bool toDestroy;
 		static ImgHolder images;
 		Color color;
 		Tile();
@@ -18,8 +19,8 @@ class Tile
 		~Tile();
 		void draw(SDL_Surface* target, int x, int y);
 		void setHighlight(bool highlight);
-		int getWidth();
-		int getHeight();
+		static int getWidth();
+		static int getHeight();
 		bool operator ==(const Tile &t);
 };
 

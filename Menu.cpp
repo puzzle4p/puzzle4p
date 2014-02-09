@@ -13,6 +13,6 @@ void Menu::onMouseDown(int pointerX, int pointerY)
 {
 	if (isPointInsideRectFromCorner(pointerX, pointerY, buttonSprite->mainRect))
 	{
-		
+		stateManager::changeState(STATE_GAME);
 	}
 }

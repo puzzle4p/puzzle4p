@@ -6,6 +6,7 @@
 #include "Util.h"
 #include "State.h"
 #include "layerManager.h"
+#include "stateManager.h"
 #include "Sprite.h"
 #include <vector>
 #include <string>

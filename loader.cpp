@@ -12,7 +12,9 @@ int main(int argc, char* args[])
 	int windowWidth = 640;
 	int windowHeight = 480;
 	std::string windowTitle = "puzzle4p";
-	std::string destinationOfImage = "hello.bmp";
+	std::string menuImageDestination = "menu_background.bmp";
+	std::string gameImageDestination = "game_background.bmp";
+
 
 	SDL_Window *mainWindow = SDL_CreateWindow(windowTitle.c_str(), 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 	SDL_Renderer *renderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED);
@@ -20,8 +22,8 @@ int main(int argc, char* args[])
 
 	layerManager::setRenderer(renderer, windowSurface);
 
-	State *newMenu = new Menu(windowSurface, destinationOfImage);
-	State *newGame = new Game();
+	State *newMenu = new Menu(windowSurface, menuImageDestination);
+	State *newGame = new Game(windowSurface, gameImageDestination);
 
 	stateManager::addToMap(STATE_MENU, newMenu);
 	stateManager::addToMap(STATE_GAME, newGame);

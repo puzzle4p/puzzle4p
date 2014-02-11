@@ -5,6 +5,7 @@
 #include "Sprite.h"
 #include <vector>
 #include <algorithm>
+#include <map>
 
 
 class Layer
@@ -19,6 +20,7 @@ public:
 private:
 	SDL_Texture *bitmapTexture;
 	SDL_Surface *bitmapSurface;
+	std::map<std::string, SDL_Texture*> textureMap;
 };
 
 #endif //LAYER_H

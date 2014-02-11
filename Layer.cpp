@@ -1,4 +1,5 @@
 #include "layer.h"
+#include <iostream>
 
 Layer::Layer(int priority)
 {
@@ -27,13 +28,18 @@ void Layer::sortSprites()
 
 void Layer::showSprites(SDL_Renderer *renderer, SDL_Surface *windowSurface)
 {
-	for (std::vector<Sprite *>::iterator it = sprites.begin(); it != sprites.end(); ++it)
+	if (renderer)
 	{
-		bitmapSurface = (*it)->spriteSurface;
-		bitmapTexture = SDL_CreateTextureFromSurface(renderer, bitmapSurface);
-
-		SDL_RenderCopy(renderer, bitmapTexture, NULL, &((*it)->mainRect));
-		SDL_FreeSurface(bitmapSurface);
+		for (std::vector<Sprite *>::iterator it = sprites.begin(); it != sprites.end(); ++it)
+		{
+			std::cout << (textureMap.find((*it)->destinationOfImage) == textureMap.end());
+			if (textureMap.find((*it)->destinationOfImage) == textureMap.end())
+			{
+				bitmapSurface = (*it)->spriteSurface;
+				textureMap[(*it)->destinationOfImage] = SDL_CreateTextureFromSurface(renderer, bitmapSurface);
+				SDL_RenderCopy(renderer, textureMap[(*it)->destinationOfImage], NULL, &((*it)->mainRect));
+			}
+		}
+		SDL_RenderPresent(renderer);
 	}
-	SDL_RenderPresent(renderer);
 }

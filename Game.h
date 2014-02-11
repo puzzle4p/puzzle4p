@@ -8,11 +8,12 @@
 class Game : public State
 {
 public:
-	Game(SDL_Surface *windowSurface, std::string destinationOfImage);
+	Game(SDL_Window *mainWindow, SDL_Surface *windowSurface, std::string destinationOfImage);
     void onMouseDown(int pointerX, int pointerY);
 	void update();
 private:
 	Background *backgroundSurface;
+	SDL_Renderer *renderer;
 };
 
 #endif //GAME_H

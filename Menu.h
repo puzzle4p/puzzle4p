@@ -14,13 +14,15 @@
 class Menu : public State
 {
 public:
-    Menu(SDL_Surface *windowSurface, std::string destinationOfImage);
+	Menu(SDL_Window *mainWindow, SDL_Surface *windowSurface, std::string destinationOfImage);
     ~Menu();
     void onMouseDown(int pointerX, int pointerY);
 private:
+	SDL_Renderer *renderer;
 	Layer *layerButton;
-	Sprite *buttonSprite;
+	Sprite *startGameButton;
     Background *backgroundSurface;
+	SDL_Surface *windowSurface;
 };
 
 #endif // MENU_H

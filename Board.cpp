@@ -47,6 +47,11 @@ void Board::fillBoard()
 			while(!validTile);
 		}
 	}
+    if(!anyMoreMoves())
+    {
+        destroyAllTiles();
+        fillBoard();
+    }
 }
 
 bool Board::isValidTile(int row, int column)
@@ -230,19 +235,10 @@ void Board::moveTile(int row, int column, int deltaRow, int deltaColumn)
 
 void Board::update()
 {
-	if(anyMoreMoves())
-	{
-		checkIfMatch();
-		destroyTiles();
-        moveTilesDown();
-		refillWithNewTiles();
-	}
-	else
-	{
-		//std::cout<<"No more moves\n";
-		destroyAllTiles();
-		fillBoard();
-	}
+    checkIfMatch();
+    destroyTiles();
+    moveTilesDown();
+    refillWithNewTiles();
 	draw();
 }
 
@@ -371,6 +367,11 @@ void Board::refillWithNewTiles()
 			}
 		}
 	}
+	if(!anyMoreMoves())
+    {
+        destroyAllTiles();
+        fillBoard();
+    }
 }
 
 void Board::moveTilesDown()

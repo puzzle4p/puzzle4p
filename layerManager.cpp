@@ -39,7 +39,6 @@ void layerManager::showLayers()
 	{
 		(*it)->showSprites(renderer, windowSurface);
 	}
-
 }
 
 layerManager::~layerManager()

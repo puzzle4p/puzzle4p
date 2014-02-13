@@ -17,6 +17,7 @@ public:
 	std::vector<Sprite*> sprites;
 	void showSprites(SDL_Renderer *renderer, SDL_Surface *windowSurface);
 	int layerPriority;
+	void destroyLayer();
 private:
 	SDL_Texture *bitmapTexture;
 	SDL_Surface *bitmapSurface;

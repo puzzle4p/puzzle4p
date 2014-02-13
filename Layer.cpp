@@ -32,14 +32,21 @@ void Layer::showSprites(SDL_Renderer *renderer, SDL_Surface *windowSurface)
 	{
 		for (std::vector<Sprite *>::iterator it = sprites.begin(); it != sprites.end(); ++it)
 		{
-			std::cout << (textureMap.find((*it)->destinationOfImage) == textureMap.end());
 			if (textureMap.find((*it)->destinationOfImage) == textureMap.end())
 			{
-				bitmapSurface = (*it)->spriteSurface;
-				textureMap[(*it)->destinationOfImage] = SDL_CreateTextureFromSurface(renderer, bitmapSurface);
-				SDL_RenderCopy(renderer, textureMap[(*it)->destinationOfImage], NULL, &((*it)->mainRect));
+				textureMap[(*it)->destinationOfImage] = (*it)->spriteTexture;
+				SDL_RenderCopy(renderer, (*it)->spriteTexture, NULL, &((*it)->mainRect));
 			}
 		}
 		SDL_RenderPresent(renderer);
+	}
+}
+
+void Layer::destroyLayer()
+{
+	for (std::vector<Sprite *>::iterator it = sprites.begin(); it != sprites.end(); ++it)
+	{
+		SDL_DestroyTexture(textureMap[(*it)->destinationOfImage]);
+		textureMap.erase((*it)->destinationOfImage);
 	}
 }

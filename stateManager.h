@@ -15,6 +15,7 @@ public:
     static std::map<global_States, State*> enumMapToStates;
     static void addToMap(global_States globalState, State* stateObject);
 	static void onPressDown();
+	static void clear();
 private:
     static global_States current_state;
 };

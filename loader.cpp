@@ -17,9 +17,10 @@ int main(int argc, char* args[])
 
 	SDL_Window *mainWindow = SDL_CreateWindow(windowTitle.c_str(), 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 	SDL_Surface *windowSurface = SDL_GetWindowSurface(mainWindow);
+	SDL_Renderer *renderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED);
 
-	State *newMenu = new Menu(mainWindow, windowSurface, menuImageDestination);
-	State *newGame = new Game(mainWindow, windowSurface, gameImageDestination);
+	State *newMenu = new Menu(mainWindow, windowSurface, renderer, menuImageDestination);
+	State *newGame = new Game(mainWindow, windowSurface, renderer, menuImageDestination);
 
 	stateManager::addToMap(STATE_MENU, newMenu);
 	stateManager::addToMap(STATE_GAME, newGame);
@@ -41,7 +42,7 @@ int main(int argc, char* args[])
 			SDL_Delay(delay);
 		}
 
-		layerManager::showLayers();
+		layerManager::setRenderer(renderer, windowSurface);
 
 		while (SDL_PollEvent(&event))
 		{

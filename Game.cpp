@@ -30,13 +30,13 @@ void Game::update()
     while(isRunning)
     {
         board -> update();
-        handleInput();
+        checkPlayersState();
         if(!damagePoints.empty())
         {
             handleDamage();
             switchPlayer();
         }
-        checkPlayersState();
+        handleInput();
         render();
     }
 }

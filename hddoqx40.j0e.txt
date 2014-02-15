@@ -1,0 +1,171 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch se7ven
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#	deleted:    Background.cpp
+#	deleted:    Background.h
+#	new file:   Debug/PuzzleGameVS.exe
+#	new file:   Debug/PuzzleGameVS.ilk
+#	new file:   Debug/PuzzleGameVS.pdb
+#	new file:   Debug/SDL2.dll
+#	new file:   Debug/SDL2_image.dll
+#	deleted:    Game.cpp
+#	deleted:    Game.h
+#	deleted:    Menu.cpp
+#	deleted:    Menu.h
+#	new file:   Output-Build.txt
+#	new file:   PuzzleGameVS.sdf
+#	new file:   PuzzleGameVS.sln
+#	new file:   PuzzleGameVS/Background.cpp
+#	new file:   PuzzleGameVS/Background.h
+#	new file:   PuzzleGameVS/Debug/Background.obj
+#	new file:   PuzzleGameVS/Debug/Button.obj
+#	new file:   PuzzleGameVS/Debug/Game.obj
+#	new file:   PuzzleGameVS/Debug/InputBox.obj
+#	new file:   PuzzleGameVS/Debug/Layer.obj
+#	new file:   PuzzleGameVS/Debug/Menu.obj
+#	new file:   PuzzleGameVS/Debug/PuzzleGameVS.log
+#	new file:   PuzzleGameVS/Debug/PuzzleGameVS.tlog/CL.read.1.tlog
+#	new file:   PuzzleGameVS/Debug/PuzzleGameVS.tlog/CL.write.1.tlog
+#	new file:   PuzzleGameVS/Debug/PuzzleGameVS.tlog/PuzzleGameVS.lastbuildstate
+#	new file:   PuzzleGameVS/Debug/PuzzleGameVS.tlog/cl.command.1.tlog
+#	new file:   PuzzleGameVS/Debug/PuzzleGameVS.tlog/link.command.1.tlog
+#	new file:   PuzzleGameVS/Debug/PuzzleGameVS.tlog/link.read.1.tlog
+#	new file:   PuzzleGameVS/Debug/PuzzleGameVS.tlog/link.write.1.tlog
+#	new file:   PuzzleGameVS/Debug/Sprite.obj
+#	new file:   PuzzleGameVS/Debug/Util.obj
+#	new file:   PuzzleGameVS/Debug/layerManager.obj
+#	new file:   PuzzleGameVS/Debug/loader.obj
+#	new file:   PuzzleGameVS/Debug/main.obj
+#	new file:   PuzzleGameVS/Debug/stateManager.obj
+#	new file:   PuzzleGameVS/Debug/vc120.idb
+#	new file:   PuzzleGameVS/Debug/vc120.pdb
+#	new file:   PuzzleGameVS/GUI.h
+#	new file:   PuzzleGameVS/Game.cpp
+#	new file:   PuzzleGameVS/Game.h
+#	new file:   PuzzleGameVS/Layer.cpp
+#	new file:   PuzzleGameVS/Layer.h
+#	new file:   PuzzleGameVS/Menu.cpp
+#	new file:   PuzzleGameVS/Menu.h
+#	new file:   PuzzleGameVS/PuzzleGameVS.vcxproj
+#	new file:   PuzzleGameVS/PuzzleGameVS.vcxproj.filters
+#	new file:   PuzzleGameVS/SDL2/include/SDL.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_assert.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_atomic.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_audio.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_bits.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_blendmode.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_clipboard.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_config.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_cpuinfo.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_endian.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_error.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_events.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_filesystem.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_gamecontroller.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_gesture.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_haptic.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_hints.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_image.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_joystick.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_keyboard.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_keycode.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_loadso.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_log.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_main.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_messagebox.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_mouse.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_mutex.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_name.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_opengl.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_opengles.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_opengles2.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_pixels.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_platform.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_power.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_quit.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_rect.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_render.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_revision.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_rwops.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_scancode.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_shape.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_stdinc.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_surface.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_system.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_syswm.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_assert.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_common.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_compare.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_crc32.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_font.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_fuzzer.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_harness.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_images.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_log.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_md5.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_test_random.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_thread.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_timer.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_touch.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_types.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_version.h
+#	new file:   PuzzleGameVS/SDL2/include/SDL_video.h
+#	new file:   PuzzleGameVS/SDL2/include/begin_code.h
+#	new file:   PuzzleGameVS/SDL2/include/close_code.h
+#	new file:   PuzzleGameVS/SDL2/lib/x64/LICENSE.jpeg.txt
+#	new file:   PuzzleGameVS/SDL2/lib/x64/LICENSE.png.txt
+#	new file:   PuzzleGameVS/SDL2/lib/x64/LICENSE.tiff.txt
+#	new file:   PuzzleGameVS/SDL2/lib/x64/LICENSE.webp.txt
+#	new file:   PuzzleGameVS/SDL2/lib/x64/LICENSE.zlib.txt
+#	new file:   PuzzleGameVS/SDL2/lib/x64/SDL2.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x64/SDL2.lib
+#	new file:   PuzzleGameVS/SDL2/lib/x64/SDL2_image.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x64/SDL2_image.lib
+#	new file:   PuzzleGameVS/SDL2/lib/x64/SDL2main.lib
+#	new file:   PuzzleGameVS/SDL2/lib/x64/SDL2test.lib
+#	new file:   PuzzleGameVS/SDL2/lib/x64/libjpeg-9.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x64/libpng16-16.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x64/libtiff-5.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x64/libwebp-4.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x64/zlib1.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x86/LICENSE.jpeg.txt
+#	new file:   PuzzleGameVS/SDL2/lib/x86/LICENSE.png.txt
+#	new file:   PuzzleGameVS/SDL2/lib/x86/LICENSE.tiff.txt
+#	new file:   PuzzleGameVS/SDL2/lib/x86/LICENSE.webp.txt
+#	new file:   PuzzleGameVS/SDL2/lib/x86/LICENSE.zlib.txt
+#	new file:   PuzzleGameVS/SDL2/lib/x86/SDL2.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x86/SDL2.lib
+#	new file:   PuzzleGameVS/SDL2/lib/x86/SDL2_image.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x86/SDL2_image.lib
+#	new file:   PuzzleGameVS/SDL2/lib/x86/SDL2main.lib
+#	new file:   PuzzleGameVS/SDL2/lib/x86/SDL2test.lib
+#	new file:   PuzzleGameVS/SDL2/lib/x86/libjpeg-9.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x86/libpng16-16.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x86/libtiff-5.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x86/libwebp-4.dll
+#	new file:   PuzzleGameVS/SDL2/lib/x86/zlib1.dll
+#	new file:   PuzzleGameVS/Sprite.cpp
+#	new file:   PuzzleGameVS/Sprite.h
+#	renamed:    State.h -> PuzzleGameVS/State.h
+#	new file:   PuzzleGameVS/Util.cpp
+#	new file:   PuzzleGameVS/Util.h
+#	new file:   PuzzleGameVS/blue.bmp
+#	new file:   PuzzleGameVS/game_background.bmp
+#	new file:   PuzzleGameVS/hello.bmp
+#	new file:   PuzzleGameVS/layerManager.cpp
+#	new file:   PuzzleGameVS/layerManager.h
+#	new file:   PuzzleGameVS/loader.cpp
+#	new file:   PuzzleGameVS/menu_background.bmp
+#	new file:   PuzzleGameVS/red.bmp
+#	renamed:    stateManager.cpp -> PuzzleGameVS/stateManager.cpp
+#	renamed:    stateManager.h -> PuzzleGameVS/stateManager.h
+#	deleted:    Util.cpp
+#	deleted:    Util.h
+#	deleted:    loader.cpp
+#
+

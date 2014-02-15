@@ -1,0 +1,6 @@
+﻿1>------ Build started: Project: binaryEncoding, Configuration: Debug Win32 ------
+1>  codes.cpp
+1>x:\_code\cpp\binaryencoding\binaryencoding\codes.cpp(27): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+1>x:\_code\cpp\binaryencoding\binaryencoding\codes.cpp(40): warning C4244: '+=' : conversion from 'double' to 'int', possible loss of data
+1>  binaryEncoding.vcxproj -> X:\_code\cpp\binaryEncoding\Debug\binaryEncoding.exe
+========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========

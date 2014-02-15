@@ -20,7 +20,7 @@ int main(int argc, char* args[])
 	SDL_Renderer *renderer = SDL_CreateRenderer(mainWindow, -1, SDL_RENDERER_ACCELERATED);
 
 	State *newMenu = new Menu(mainWindow, windowSurface, renderer, menuImageDestination);
-	State *newGame = new Game(mainWindow, windowSurface, renderer, menuImageDestination);
+	State *newGame = new Game(mainWindow, windowSurface, renderer, gameImageDestination);
 
 	stateManager::addToMap(STATE_MENU, newMenu);
 	stateManager::addToMap(STATE_GAME, newGame);
@@ -43,6 +43,7 @@ int main(int argc, char* args[])
 		}
 
 		layerManager::setRenderer(renderer, windowSurface);
+		layerManager::showLayers();
 
 		while (SDL_PollEvent(&event))
 		{

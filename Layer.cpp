@@ -32,6 +32,7 @@ void Layer::showSprites(SDL_Renderer *renderer, SDL_Surface *windowSurface)
 	{
 		for (std::vector<Sprite *>::iterator it = sprites.begin(); it != sprites.end(); ++it)
 		{
+			std::cout << "Wyswietlam teksture: " << (*it)->destinationOfImage << std::endl;
 			SDL_RenderCopy(renderer, (*it)->spriteTexture, NULL, &((*it)->mainRect));
 		}
 		SDL_RenderPresent(renderer);

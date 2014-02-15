@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include <iostream>
 
 std::map<std::string, SDL_Texture *> Sprite::textureMap;
 
@@ -32,6 +33,7 @@ void Sprite::addTextureToMap(std::string destinationOfImage, SDL_Texture *sprite
 {
 	if (textureMap.find(destinationOfImage) == textureMap.end())
 	{
+		std::cout << "Zaladowano teksture: " << destinationOfImage << std::endl;
 		spriteTexture = IMG_LoadTexture(renderer, destinationOfImage.c_str());
 		textureMap[destinationOfImage] = spriteTexture;
 	}

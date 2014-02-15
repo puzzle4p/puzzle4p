@@ -4,7 +4,6 @@
 Game::Game(SDL_Window *mainWindow, SDL_Surface *windowSurface, SDL_Renderer *passedRenderer, std::string destinationOfImage)
 {
 	renderer = passedRenderer;
-	SDL_RenderClear(renderer);
 	backgroundSurface = new Background(windowSurface, renderer, destinationOfImage);
 
 	layerButton = layerManager::addLayer(1);

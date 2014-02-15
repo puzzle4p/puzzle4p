@@ -13,7 +13,6 @@ public:
 	Game(SDL_Window *mainWindow, SDL_Surface *windowSurface, SDL_Renderer *passedRenderer, std::string destinationOfImage);
     void onMouseDown(int pointerX, int pointerY);
 	void update();
-	void clear();
 private:
 	SDL_Renderer *renderer;
 	Layer *layerButton;

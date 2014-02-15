@@ -22,6 +22,7 @@ private:
 	Layer *layerButton;
 	Sprite *startGameButton;
     Background *backgroundSurface;
+	global_States state;
 };
 
 #endif // MENU_H

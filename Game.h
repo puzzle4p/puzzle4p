@@ -18,6 +18,7 @@ private:
 	Layer *layerButton;
 	Sprite *startGameButton;
 	Background *backgroundSurface;
+	global_States state;
 };
 
 #endif //GAME_H

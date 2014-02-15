@@ -8,7 +8,7 @@
 class Background
 {
 public:
-    Background(SDL_Surface *windowSurface, SDL_Renderer *passedRenderer, std::string destinationOfImage);
+    Background(SDL_Surface *windowSurface, SDL_Renderer *passedRenderer, std::string destinationOfImage, global_States state);
     ~Background();
 private:
 	SDL_Renderer *renderer;

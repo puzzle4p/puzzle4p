@@ -3,11 +3,12 @@
 
 Menu::Menu(SDL_Window *mainWindow, SDL_Surface *windowSurface, SDL_Renderer *passedRenderer, std::string destinationOfImage)
 {
+	state = STATE_MENU;
 	renderer = passedRenderer;
-	backgroundSurface = new Background(windowSurface, renderer, destinationOfImage);
+	backgroundSurface = new Background(windowSurface, renderer, destinationOfImage, state);
 
 	layerButton = layerManager::addLayer(1);
-	startGameButton = new Sprite(renderer, "red.bmp", 0, 100, 100, 100, 100);
+	startGameButton = new Sprite(renderer, "red.bmp", 0, 100, 100, 100, 100, state);
 	layerButton->addSprite(startGameButton);
 }
 

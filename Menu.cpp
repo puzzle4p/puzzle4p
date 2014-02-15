@@ -20,11 +20,3 @@ void Menu::onMouseDown(int pointerX, int pointerY)
 		stateManager::changeState(STATE_GAME);
 	}
 }
-
-void Menu::clear()
-{
-	for (std::vector<Layer *>::iterator it = layerManager::layers.begin(); it != layerManager::layers.end(); ++it)
-	{
-		(*it)->destroyLayer();
-	}
-}

@@ -15,7 +15,6 @@ void stateManager::onMouseDown(int pointerX, int pointerY)
 
 void stateManager::changeState(global_States state)
 {
-	clear();
     current_state = state;
 }
 
@@ -27,9 +26,4 @@ void stateManager::addToMap(global_States globalState, State* stateObject)
 void stateManager::onPressDown()
 {
 	//to be done
-}
-
-void stateManager::clear()
-{
-	enumMapToStates[current_state]->clear();
 }

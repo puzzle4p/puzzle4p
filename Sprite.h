@@ -4,6 +4,7 @@
 #include "SDL.h"
 #include <string>
 #include "SDL_image.h"
+#include <map>
 
 class Sprite
 {
@@ -14,6 +15,8 @@ public:
 	std::string destinationOfImage;
 	SDL_Texture *spriteTexture;
 	SDL_Rect mainRect;
+	void addTextureToMap(std::string destinationOfImage, SDL_Texture *spriteTexture);
+	static std::map<std::string, SDL_Texture *> textureMap;
 private:
 	SDL_Renderer *renderer;
 };

@@ -1,0 +1,21 @@
+﻿Build started 2014-02-15 20:35:26.
+     1>Project "X:\_code\cpp\SDL\PuzzleGame\PuzzleGameVS\PuzzleGameVS\PuzzleGameVS.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         D:\Programy\Visual Studio 2013 Professional\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Layer.cpp
+         Layer.cpp
+       Link:
+         D:\Programy\Visual Studio 2013 Professional\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"X:\_code\cpp\SDL\PuzzleGame\PuzzleGameVS\Debug\PuzzleGameVS.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"X:\_code\cpp\SDL\PuzzleGame\PuzzleGameVS\Debug\PuzzleGameVS.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"X:\_code\cpp\SDL\PuzzleGame\PuzzleGameVS\Debug\PuzzleGameVS.lib" /MACHINE:X86 Debug\Background.obj
+         Debug\Game.obj
+         Debug\Layer.obj
+         Debug\layerManager.obj
+         Debug\loader.obj
+         Debug\Menu.obj
+         Debug\Sprite.obj
+         Debug\stateManager.obj
+         Debug\Util.obj
+         PuzzleGameVS.vcxproj -> X:\_code\cpp\SDL\PuzzleGame\PuzzleGameVS\Debug\PuzzleGameVS.exe
+     1>Done Building Project "X:\_code\cpp\SDL\PuzzleGame\PuzzleGameVS\PuzzleGameVS\PuzzleGameVS.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.41

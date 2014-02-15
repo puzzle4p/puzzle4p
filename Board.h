@@ -2,6 +2,7 @@
 #define BOARD_H
 #include <SDL.h>
 #include <vector>
+#include <queue>
 #include "Tile.h"
 #include "TilesFactory.h"
 #include "Direction.h"
@@ -19,6 +20,8 @@ class Board
 		Tile* previouslyClickedTile;
 		SDL_Surface* boardSurface;
 		SDL_Surface* targetSurface;
+		int x, y;
+		std::queue<int>* damagePoints;
 	private:
 	    bool isValidTile(int row, int column);
 		bool isValidTileHorizontal(int row, int column);
@@ -41,7 +44,7 @@ class Board
 		bool anyMoreMovesHorizontal();
 		void destroyAllTiles();
 	public:
-		Board(int _size, SDL_Surface* _targetSurface);
+		Board(int _size, SDL_Surface* _targetSurface, int _x, int _y, std::queue<int> &damageQueue);
 		~Board();
 		/**
 		 *  \brief Obsługuje kliknięcia myszą na kafelkach.
@@ -50,7 +53,7 @@ class Board
 		 *
 		 *  \details Należy wywoływać z klasy sprawującej kontrolę nad zdarzeniami SDL
 		 */
-		void onMouseDown(SDL_Event event);
+		void onMouseDown(int posX, int posY);
 		/**
 		 *  \brief Rysuje plansze do  gry wraz z kafelkami
 		 *

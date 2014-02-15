@@ -1,17 +1,20 @@
 #include "Board.h"
 #include <algorithm>
 #include <iostream>
-Board::Board(int _size, SDL_Surface* _targetSurface):
+#define DAMAGE 1
+Board::Board(int _size, SDL_Surface* _targetSurface, int _x, int _y, std::queue<int> &damageQueue):
 size(_size),
 tiles(size, std::vector<Tile*>(size)),
-tilesToDestroy(size, std::vector<bool>(size, false))
+tilesToDestroy(size, std::vector<bool>(size, false)),
+x(_x),
+y(_y)
 {
 	tilesFactory = new TilesFactory();
 	targetSurface = _targetSurface;
+	damagePoints = &damageQueue;
 	previouslyClickedTile = NULL;
 	fillBoard();
 	boardSurface = SDL_CreateRGBSurface(0, size * 60, size * 60, 32, 0, 0, 0, 0);
-
 }
 
 Board::~Board()
@@ -92,12 +95,12 @@ bool Board::isValidTileVertical(int row, int column)
 
 	return returnValue;
 }
-void Board::onMouseDown(SDL_Event event)
+void Board::onMouseDown(int posX, int posY)
 {
-	if(event.type == SDL_MOUSEBUTTONDOWN)
+	//if(event.type == SDL_MOUSEBUTTONDOWN)
 	{
-		int x = event.button.x;
-		int y = event.button.y;
+		int x = posX;
+		int y = posY;
 		Tile* clickedTile = NULL;
 
         clickedTile = whichTileHasBeenClicked(x, y);
@@ -235,11 +238,15 @@ void Board::moveTile(int row, int column, int deltaRow, int deltaColumn)
 
 void Board::update()
 {
-    checkIfMatch();
-    destroyTiles();
-    moveTilesDown();
-    refillWithNewTiles();
-	draw();
+    do
+    {
+        checkIfMatch();
+        destroyTiles();
+        moveTilesDown();
+        refillWithNewTiles();
+    }
+    while(checkIfMatch());
+	//draw();
 }
 
 bool Board::checkIfMatch()
@@ -349,6 +356,7 @@ void Board::destroyTiles()
 			{
                 delete tiles[rowIndex][columnIndex];
                 tiles[rowIndex][columnIndex] = NULL;
+                damagePoints -> push(DAMAGE);
 			}
 		}
 	}
@@ -503,6 +511,9 @@ void Board::resetTilesToDestroy()
 }
 void Board::draw()
 {
+    SDL_Rect targetRect;
+	targetRect.x = x;
+	targetRect.y = y;
 	SDL_Rect background;
 	background.x = 0;
 	background.y = 0;
@@ -524,7 +535,7 @@ void Board::draw()
 			}
 		}
 	}
-	SDL_BlitSurface(boardSurface, NULL, targetSurface, NULL);
+	SDL_BlitSurface(boardSurface, NULL, targetSurface, &targetRect);
 	if(previouslyClickedTile != NULL)
 	{
 		previouslyClickedTile -> setHighlight(false);

@@ -21,7 +21,9 @@ public:
 private:
 	SDL_Renderer *renderer;
 	Layer *layerButton;
+	Sprite *title;
 	Sprite *startGameButton;
+	Sprite *quitButton;
     Background *backgroundSurface;
 	global_States state;
 };

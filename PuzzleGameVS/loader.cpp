@@ -1,6 +1,7 @@
 #include "SDL.h"
 #include "Menu.h"
 #include "Game.h"
+#include "Quit.h"
 #include "layerManager.h"
 #include "drawingManager.h"
 #include <string>
@@ -14,7 +15,7 @@ int main(int argc, char* args[])
 	int windowHeight = 720;
 	int boardSize = 8;
 	std::string windowTitle = "puzzle4p";
-	std::string menuImageDestination = "Images/menu_background.bmp";
+	std::string menuImageDestination = "Images//MAIN_MENU_BG.png";
 	std::string gameImageDestination = "Images/game_background.bmp";
 	drawingManager::window = SDL_CreateWindow(windowTitle.c_str(), 100, 100, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
 	SDL_Surface *windowSurface = SDL_GetWindowSurface(drawingManager::window);
@@ -22,9 +23,11 @@ int main(int argc, char* args[])
 
 	State *newMenu = new Menu(drawingManager::window, drawingManager::renderer, windowSurface, menuImageDestination);
 	State *newGame = NULL;
+	State *quitState = new Quit();
 
 	stateManager::addToMap(STATE_MENU, newMenu);
 	stateManager::addToMap(STATE_GAME, newGame);
+	stateManager::addToMap(STATE_QUIT, quitState);
 	stateManager::changeState(STATE_MENU);
 
 	SDL_Event event;
@@ -58,7 +61,10 @@ int main(int argc, char* args[])
 			delete stateManager::enumMapToStates[STATE_GAME];
 			stateManager::enumMapToStates[STATE_GAME] = NULL;
 		}
-
+		if (stateManager::current_state == STATE_QUIT)
+		{
+			quit = true;
+		}
 		layerManager::setRenderer(drawingManager::renderer, windowSurface);
 		layerManager::showLayers();
 		SDL_RenderPresent(drawingManager::renderer);

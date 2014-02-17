@@ -85,6 +85,7 @@
     <ClCompile Include="loader.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Quit.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="stateManager.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -104,6 +105,7 @@
     <ClInclude Include="layerManager.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Quit.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="stateManager.h" />

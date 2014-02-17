@@ -8,8 +8,12 @@ Menu::Menu(SDL_Window *mainWindow, SDL_Renderer *passed_renderer, SDL_Surface *w
 	backgroundSurface = new Background(windowSurface, passed_renderer, destinationOfImage, state);
 
 	layerButton = layerManager::addLayer(1);
-	startGameButton = new Sprite(renderer, "Images//start-button.png", 0, 100, 100, 200, 200, state);
+	title = new Sprite(renderer, "Images//MAIN_MENU_TITLE.png", 0, 275, 100, 729, 175, state);
+	startGameButton = new Sprite(renderer, "Images//PLAY_BUTTON.png", 0, 400, 400, 306, 121, state);
+	quitButton = new Sprite(renderer, "Images//QUIT_BUTTON.png", 0, 500, 550, 306, 121, state);
+	layerButton->addSprite(title);
 	layerButton->addSprite(startGameButton);
+	layerButton->addSprite(quitButton);
 }
 
 void Menu::onMouseDown(int pointerX, int pointerY)
@@ -18,6 +22,11 @@ void Menu::onMouseDown(int pointerX, int pointerY)
 	{
 		std::cout << "state game\n";
 		stateManager::changeState(STATE_GAME);
+	}
+	if (isPointInsideRectFromCorner(pointerX, pointerY, quitButton->mainRect))
+	{
+		std::cout << "state quit\n";
+		stateManager::changeState(STATE_QUIT);
 	}
 }
 void Menu::update()

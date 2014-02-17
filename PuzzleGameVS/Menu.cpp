@@ -8,7 +8,7 @@ Menu::Menu(SDL_Window *mainWindow, SDL_Renderer *passed_renderer, SDL_Surface *w
 	backgroundSurface = new Background(windowSurface, passed_renderer, destinationOfImage, state);
 
 	layerButton = layerManager::addLayer(1);
-	startGameButton = new Sprite(renderer, "Images/red_button.bmp", 0, 100, 100, 100, 100, state);
+	startGameButton = new Sprite(renderer, "Images//start-button.png", 0, 100, 100, 200, 200, state);
 	layerButton->addSprite(startGameButton);
 }
 

@@ -9,10 +9,10 @@ Game::Game(SDL_Window *mainWindow, SDL_Renderer *passed_renderer, SDL_Surface *_
 	window = mainWindow;
 	windowSurface = _windowSurface;
 	images = new ImgHolder(renderer);
-	backgroundTexture = IMG_LoadTexture(renderer, "Images/Background.bmp");
+	backgroundTexture = IMG_LoadTexture(renderer, "Images//Background.bmp");
 	board = new Board(bs, images, renderer, windowSurface, boardPlacementX, boardPlacementY, damagePoints);
-	player1 = new Player(renderer, "Player 1", "Images/Character_1.png");
-	player2 = new Player(renderer, "Player 2", "Images/Character_2.png");
+	player1 = new Player(renderer, "Player 1", "Images//Character_1.png");
+	player2 = new Player(renderer, "Player 2", "Images//Character_2.png");
 	player1->setPosition(11, 0);
 	player2->setPosition(windowSurface->w - player2->getWidth() - 11, 0);
 	activePlayer = player1;
@@ -22,6 +22,7 @@ Game::Game(SDL_Window *mainWindow, SDL_Renderer *passed_renderer, SDL_Surface *_
 
 Game::~Game()
 {
+	delete images;
 	delete board;
 	delete player1;
 	delete player2;

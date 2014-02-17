@@ -71,6 +71,7 @@
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="drawingManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="ImgHolder.cpp" />
     <ClCompile Include="Layer.cpp" />
@@ -89,6 +90,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="Colors.h" />
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="drawingManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="ImgHolder.h" />

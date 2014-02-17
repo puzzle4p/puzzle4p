@@ -2,19 +2,22 @@
 #include <algorithm>
 #include <iostream>
 #define DAMAGE 1
-Board::Board(int _size, SDL_Surface* _targetSurface, int _x, int _y, std::queue<int> &damageQueue):
+Board::Board(int _size, ImgHolder* holder, SDL_Renderer *_renderer, SDL_Surface* _targetSurface, int _x, int _y, std::queue<int> &damageQueue):
 size(_size),
 tiles(size, std::vector<Tile*>(size)),
 tilesToDestroy(size, std::vector<bool>(size, false)),
 x(_x),
-y(_y)
+y(_y),
+renderer(_renderer)
 {
-	tilesFactory = new TilesFactory();
+	images = holder;
+	tilesFactory = new TilesFactory(images);
 	targetSurface = _targetSurface;
 	damagePoints = &damageQueue;
 	previouslyClickedTile = NULL;
 	fillBoard();
 	boardSurface = SDL_CreateRGBSurface(0, size * 60, size * 60, 32, 0, 0, 0, 0);
+	boardTexture = SDL_CreateTextureFromSurface(renderer, boardSurface);
 }
 
 Board::~Board()
@@ -509,17 +512,16 @@ void Board::resetTilesToDestroy()
 		}
 	}
 }
+
 void Board::draw()
 {
-    SDL_Rect targetRect;
-	targetRect.x = x;
-	targetRect.y = y;
 	SDL_Rect background;
-	background.x = 0;
-	background.y = 0;
+	background.x = x;
+	background.y = y;
 	background.w = size * 60;
 	background.h = size * 60;
-	SDL_FillRect(boardSurface, &background, 0);
+	//SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+	//SDL_RenderFillRect(renderer, &background);
 
 	if(previouslyClickedTile != NULL)
 	{
@@ -531,12 +533,12 @@ void Board::draw()
 		{
 			if(tiles[rowIndex][columnIndex] != NULL)
 			{
-				tiles[rowIndex][columnIndex] -> draw(boardSurface, tiles[rowIndex][columnIndex] -> getWidth() * rowIndex, tiles[rowIndex][columnIndex] -> getHeight() * columnIndex);
+				tiles[rowIndex][columnIndex] -> draw(renderer, tiles[rowIndex][columnIndex] -> getWidth() * rowIndex + x, tiles[rowIndex][columnIndex] -> getHeight() * columnIndex + y);
 			}
 		}
 	}
-	SDL_BlitSurface(boardSurface, NULL, targetSurface, &targetRect);
-	if(previouslyClickedTile != NULL)
+	//SDL_RenderCopy(renderer, boardTexture, NULL, &targetRect);
+	if (previouslyClickedTile != NULL)
 	{
 		previouslyClickedTile -> setHighlight(false);
 	}

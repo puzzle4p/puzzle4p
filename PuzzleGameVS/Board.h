@@ -19,9 +19,12 @@ class Board
 		std::vector<std::vector<bool> > tilesToDestroy;
 		Tile* previouslyClickedTile;
 		SDL_Surface* boardSurface;
+		SDL_Texture* boardTexture;
 		SDL_Surface* targetSurface;
+		SDL_Renderer *renderer;
 		int x, y;
 		std::queue<int>* damagePoints;
+		ImgHolder* images;
 	private:
 	    bool isValidTile(int row, int column);
 		bool isValidTileHorizontal(int row, int column);
@@ -44,7 +47,7 @@ class Board
 		bool anyMoreMovesHorizontal();
 		void destroyAllTiles();
 	public:
-		Board(int _size, SDL_Surface* _targetSurface, int _x, int _y, std::queue<int> &damageQueue);
+		Board(int _size, ImgHolder* holder, SDL_Renderer *_renderer, SDL_Surface* _targetSurface, int _x, int _y, std::queue<int> &damageQueue);
 		~Board();
 		/**
 		 *  \brief Obsługuje kliknięcia myszą na kafelkach.

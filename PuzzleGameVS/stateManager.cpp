@@ -6,6 +6,7 @@ std::map<global_States, State*> stateManager::enumMapToStates;
 
 void stateManager::update()
 {
+	enumMapToStates[current_state]->update();
 }
 
 void stateManager::onMouseDown(int pointerX, int pointerY)

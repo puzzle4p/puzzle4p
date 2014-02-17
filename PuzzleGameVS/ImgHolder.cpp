@@ -1,18 +1,20 @@
 #include "ImgHolder.h"
-ImgHolder::ImgHolder()
+ImgHolder::ImgHolder(SDL_Renderer *renderer)
 {
-	images.push_back(SDL_LoadBMP("Images/tiles/blue.bmp"));
-	images.push_back(SDL_LoadBMP("Images/tiles/red.bmp"));
-	images.push_back(SDL_LoadBMP("Images/tiles/green.bmp"));
-	images.push_back(SDL_LoadBMP("Images/tiles/yellow.bmp"));
-	images.push_back(SDL_LoadBMP("Images/tiles/white.bmp"));
-	images.push_back(SDL_LoadBMP("Images/tiles/blueHighlighted.bmp"));
-	images.push_back(SDL_LoadBMP("Images/tiles/redHighlighted.bmp"));
-	images.push_back(SDL_LoadBMP("Images/tiles/greenHighlighted.bmp"));
-	images.push_back(SDL_LoadBMP("Images/tiles/yellowHighlighted.bmp"));
-	images.push_back(SDL_LoadBMP("Images/tiles/whiteHighlighted.bmp"));
+	
+	images.push_back(IMG_LoadTexture(renderer, "Images/Gems/Gem_Blue_1.png"));
+	images.push_back(IMG_LoadTexture(renderer, "Images/Gems/Gem_Green_1.png"));
+	images.push_back(IMG_LoadTexture(renderer, "Images/Gems/Gem_Purple_1.png"));
+	images.push_back(IMG_LoadTexture(renderer, "Images/Gems/Gem_Red_1.png"));
+	images.push_back(IMG_LoadTexture(renderer, "Images/Gems/Gem_Yellow_1.png"));
+
+	images.push_back(IMG_LoadTexture(renderer, "Images/Gems/Gem_Blue_2.png"));
+	images.push_back(IMG_LoadTexture(renderer, "Images/Gems/Gem_Green_2.png"));
+	images.push_back(IMG_LoadTexture(renderer, "Images/Gems/Gem_Purple_2.png"));
+	images.push_back(IMG_LoadTexture(renderer, "Images/Gems/Gem_Red_2.png"));
+	images.push_back(IMG_LoadTexture(renderer, "Images/Gems/Gem_Yellow_2.png"));
 }
-SDL_Surface* ImgHolder::getImage(int color)
+SDL_Texture* ImgHolder::getImage(int color)
 {
 	return images[color];
 }

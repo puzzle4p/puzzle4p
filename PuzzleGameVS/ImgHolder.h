@@ -3,14 +3,15 @@
 #include <SDL.h>
 #include <vector>
 #include "Colors.h"
+#include "SDL_image.h"
 
 class ImgHolder 
 {
 	private:
-		std::vector<SDL_Surface*> images;
+		std::vector<SDL_Texture*> images;
 	public:
-		ImgHolder();
-		SDL_Surface* getImage(int color);
+		ImgHolder(SDL_Renderer *renderer);
+		SDL_Texture* getImage(int color);
 };
 
 #endif

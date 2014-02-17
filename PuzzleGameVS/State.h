@@ -5,6 +5,7 @@ class State
 {
 public:
     virtual void onMouseDown(int pointerX, int pointerY) = 0;
+	virtual void update() = 0;
 };
 
 #endif // STATE_H

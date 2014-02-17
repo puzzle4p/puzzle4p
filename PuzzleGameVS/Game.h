@@ -14,7 +14,7 @@
 class Game : public State
 {
 public:
-	Game(SDL_Window *mainWindow, SDL_Renderer *passed_renderer, SDL_Surface *windowSurface, std::string destinationOfImage, int bs);
+	Game(SDL_Window *mainWindow, SDL_Renderer *passed_renderer, SDL_Surface *_windowSurface, std::string destinationOfImage, int bs);
 	virtual ~Game();
 	void start();
 	void onMouseDown(int pointerX, int pointerY);
@@ -24,6 +24,8 @@ private:
 	Player* player2;
 	Player* activePlayer;
 	Board* board;
+	SDL_Texture* backgroundTexture;
+	ImgHolder* images;
 	SDL_Surface *windowSurface;
 	Layer *layerButton;
 	Sprite *startGameButton;
@@ -33,6 +35,7 @@ private:
 	bool isRunning;
 	SDL_Renderer *renderer;
 	SDL_Window *window;
+	SDL_Event e;
 private:
 	void update();
 	void handleDamage();

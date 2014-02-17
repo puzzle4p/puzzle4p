@@ -3,25 +3,28 @@
 #include <SDL.h>
 #include "Colors.h"
 #include "ImgHolder.h"
+#include "drawingManager.h"
 
 class Tile
 {
-	private:
-		SDL_Surface* tileImage;
-		int edgeLength;
-		bool isHighlighted;
-	public:
-		//bool toDestroy;
-		static ImgHolder images;
-		Color color;
-		Tile();
-		Tile(Color color);
-		~Tile();
-		void draw(SDL_Surface* target, int x, int y);
-		void setHighlight(bool highlight);
-		static int getWidth();
-		static int getHeight();
-		bool operator ==(const Tile &t);
+private:
+	SDL_Surface* tileImage;
+	int edgeLength;
+	bool isHighlighted;
+	//int w;
+	//int h;
+public:
+	//bool toDestroy;
+	ImgHolder *images;
+	Color color;
+	Tile(ImgHolder* holder);
+	Tile(ImgHolder* holder, Color color);
+	~Tile();
+	void draw(SDL_Renderer* renderer, int x, int y);
+	void setHighlight(bool highlight);
+	int getWidth();
+	int getHeight();
+	bool operator ==(const Tile &t);
 };
 
 #endif

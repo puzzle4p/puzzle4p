@@ -20,6 +20,10 @@ void Menu::onMouseDown(int pointerX, int pointerY)
 		stateManager::changeState(STATE_GAME);
 	}
 }
+void Menu::update()
+{
+
+}
 
 Menu::~Menu()
 {

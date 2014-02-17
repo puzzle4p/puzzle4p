@@ -2,43 +2,49 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
-ImgHolder Tile::images = ImgHolder();
-Tile::Tile()
+#define WIDTH 70
+#define HEIGHT 70
+
+Tile::Tile(ImgHolder* holder)
 {
+	images = holder;
 	color = static_cast<Color>(rand() % 5);
 	isHighlighted = false;
-	//toDestroy = false;
+	//SDL_QueryTexture(images->getImage(color), NULL, NULL, &w, &h);
 }
-Tile::Tile(Color color)
+Tile::Tile(ImgHolder* holder, Color color)
 {
-	this -> color = color;
+	images = holder;
+	this->color = color;
 	isHighlighted = false;
-	//toDestroy = false;
+	//SDL_QueryTexture(images->getImage(color), NULL, NULL, &w, &h);
 }
 Tile::~Tile()
 {
 }
-void Tile::draw(SDL_Surface* target, int x, int y)
+void Tile::draw(SDL_Renderer* renderer, int x, int y)
 {
 	SDL_Rect targetRect;
 	targetRect.x = x;
 	targetRect.y = y;
-	if(!isHighlighted)
+	targetRect.w = WIDTH;
+	targetRect.h = HEIGHT;
+	if (!isHighlighted)
 	{
-		SDL_BlitSurface(Tile::images.getImage(color), NULL, target, &targetRect);
+		SDL_RenderCopy(renderer, images->getImage(color), NULL, &targetRect);
 	}
 	else
 	{
-		SDL_BlitSurface(Tile::images.getImage(color + 5), NULL, target, &targetRect);
+		SDL_RenderCopy(renderer, images->getImage(color + 5), NULL, &targetRect);
 	}
 }
 int Tile::getWidth()
 {
-	return 60;
+	return WIDTH;
 }
 int Tile::getHeight()
 {
-	return 60;
+	return HEIGHT;
 }
 void Tile::setHighlight(bool highlight)
 {
@@ -46,7 +52,7 @@ void Tile::setHighlight(bool highlight)
 }
 bool Tile::operator ==(const Tile &t)
 {
-	if(color == t.color)
+	if (color == t.color)
 	{
 		return true;
 	}

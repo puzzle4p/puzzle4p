@@ -17,6 +17,7 @@ public:
 	Menu(SDL_Window *mainWindow, SDL_Renderer *passed_renderer, SDL_Surface *windowSurface, std::string destinationOfImage);
     ~Menu();
     void onMouseDown(int pointerX, int pointerY);
+	void update();
 private:
 	SDL_Renderer *renderer;
 	Layer *layerButton;
